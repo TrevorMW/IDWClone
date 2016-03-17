@@ -1,0 +1,30 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2015 Amasty (https://www.amasty.com)
+ * @package Amasty_Preorder
+ */
+
+?>
+
+<tr>
+    <td class="label"><label for="inventory_preorder_note"><?php echo $this->__('Pre-Order Note') ?></label></td>
+    <td class="value">
+        <input type="text" class="input-text" id="inventory_preorder_note" name="attributes[preorder_note]" value="" disabled />
+        <br />
+        <input type="checkbox" id="inventory_preorder_note_checkbox" onclick="toggleValueElementsWithCheckbox(this)">
+        <label for="inventory_preorder_note_checkbox" class="normal"><?php echo Mage::helper('adminhtml')->__('Change') ?></label>
+    </td>
+    <td class="value scope-label"><?php echo Mage::helper('adminhtml')->__('[STORE VIEW]') ?></td>
+</tr>
+
+<tr>
+    <td class="label"><label for="inventory_preorder_cart_label"><?php echo $this->__('Pre-Order Cart Button') ?></label></td>
+    <td class="value">
+        <input type="text" class="input-text" id="inventory_preorder_cart_label" name="attributes[preorder_cart_label]" value="" disabled />
+        <br />
+        <input type="checkbox" id="inventory_preorder_cart_label_checkbox" onclick="toggleValueElementsWithCheckbox(this)">
+        <label for="inventory_preorder_cart_label_checkbox" class="normal"><?php echo Mage::helper('adminhtml')->__('Change') ?></label>
+    </td>
+    <td class="value scope-label"><?php echo Mage::helper('adminhtml')->__('[STORE VIEW]') ?></td>
+</tr>

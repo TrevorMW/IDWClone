@@ -1,0 +1,14 @@
+<?php
+
+$show_msg = Mage::getStoreConfig( 'design/discount_messages/show_message');
+$msg      = Mage::getStoreConfig( 'design/discount_messages/message_text');
+
+if( $show_msg ){ ?>
+
+  <div class="wrapper global-notice discount-notice">
+    <div class="container center">
+      <p><?php echo $msg; ?></p>
+    </div>
+  </div>
+
+<?php } ?>

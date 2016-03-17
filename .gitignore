@@ -1,0 +1,62 @@
+# git ls-files --others --exclude-from=.git/info/exclude
+# Lines that start with '#' are comments.
+# 
+# Magento Gitignore
+# Author: Luis E. Tineo<luis@codegrease.com>
+# Version: 1.3.1
+
+*.lt
+.buildpath
+.cache
+.cproject
+.DS_Store
+.idea
+.project
+.sass-cache
+.settings
+.svn
+.tmproj
+*~
+*.bak
+*.db
+*.swp
+*.tmp
+
+app/etc/local.xml
+
+downloader/.cache
+downloader/cache.cfg
+downloader/connect.cfg
+downloader/pearlib/cache
+downloader/pearlib/download
+google*.html
+
+includes/src
+includes/stat
+
+media/*/
+nbproject
+sitemap.xml
+staging
+
+var/log
+var/report
+var/cache
+var/export
+var/importexport
+!var/package
+var/session
+var/resource_config.json
+
+/tmp
+*_hao
+*.maint
+*.gz
+*.directory
+*.cfg
+
+/wp
+/wp/wp-content/uploads
+/wp/wp-config.php
+var/cache/*
+var/package/tmp/*

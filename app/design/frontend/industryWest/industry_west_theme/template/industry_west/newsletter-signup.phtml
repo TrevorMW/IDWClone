@@ -1,0 +1,109 @@
+<?php // IF WE ARE ON HOMEPAGE
+
+Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
+
+//if( Mage::getSingleton('cms/page')->getIdentifier() == 'home'  &&  Mage::app()->getFrontController()->getRequest()->getRouteName() == 'cms') : ?>
+
+<div id="newsletter-popup" data-popup="newsletter" class="wrap table popup">
+  <div class="table-cell popup-background">
+    <div class="popup-body">
+      <header class="popup-header">
+        <div class="table-cell"></div>
+        <div class="table-cell"><a href="#" data-popup-close="true"><i class="fa fa-times"></i></a></div>
+      </header>
+      <div class="popup-body-inner">
+        <div class="center">
+          <h1>Industry West: <strong>Design, Quality, Value, Community.</strong></h1>
+          <h3>Receive 10% off your first order<em>*</em></h3>
+        </div>
+        <div class="popup-errors" data-signup-error="true"></div>
+        <form data-url="/newsletter-signup.php" data-method="post" data-newsletter-signup class="active-form">
+          <ul>
+            <li>
+              <input type="email" class="input-text" name="mchmp_email" placeholder="Enter your email address..."/>
+            </li>
+            <li class="submit">
+              <button type="submit" class="btn btn-orange">Continue</button>
+            </li>
+          </ul>
+        </form>
+        <br /><br />
+        <small>* Offer valid for first time registrants only</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var popup = '';
+
+  ;(function($, window, undefined)
+  {
+    $(document).ready(function()
+    {
+      popup = {
+        el: '',
+        mode: '',
+        lock_body:function()
+        {
+          $(document.body).addClass('lock');
+        },
+        unlock_body:function()
+        {
+          $(document.body).removeClass('lock');
+        },
+        set_data: function( a )
+        {
+          if( a[0] != undefined )
+          {
+            this.el = a;
+            this.mode = a.data('mode');
+          }
+        },
+        show_popup:function()
+        {
+          this.el.addClass('active-popup');
+          this.lock_body();
+        },
+        hide_popup:function()
+        {
+          this.el.removeClass('active-popup');
+          this.unlock_body();
+        }
+      }
+
+      if( $.cookie('newsletter-signup') != 'visited' )
+      {
+        var el = $('[data-popup="newsletter"]');
+
+        popup.set_data(el);
+        setTimeout(function()
+        {
+          popup.show_popup();
+        }, 1000)
+      }
+
+      // CLOSE POPUP
+      $(document).on('click', '[data-popup-close]', function(e)
+      {
+        e.preventDefault();
+        $.cookie('newsletter-signup', 'visited');
+        popup.hide_popup();
+      })
+
+      $('[data-popup] .popup-background').click(function(e)
+      {
+        if( e.target == this )
+        {
+          e.preventDefault();
+          $.cookie('newsletter-signup', 'visited');
+          popup.hide_popup();
+        }
+      })
+
+    })
+
+  })(jQuery, window)
+
+  </script>
+

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <IndustryWest_CustomTabs>
+            <version>0.0.1</version>
+        </IndustryWest_CustomTabs>
+    </modules>
+    <global>
+        <blocks>
+            <customtabs>
+                <class>IndustryWest_CustomTabs_Block</class>
+            </customtabs>
+        </blocks>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <customtabs>
+                    <file>customtabs.xml</file>
+                </customtabs>
+            </updates>
+        </layout>
+    </frontend>
+</config>

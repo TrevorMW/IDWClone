@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <magemenu translate="label" module="magemenu">
+            <label>Mage Menu</label>
+            <tab>obbase</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+          						<enabled translate="label">
+                                      <label>Enabled</label>
+                                      <frontend_type>select</frontend_type>
+                                      <source_model>adminhtml/system_config_source_yesno</source_model>
+                                      <sort_order>10</sort_order>
+                                      <show_in_default>1</show_in_default>
+                                      <show_in_website>1</show_in_website>
+                                      <show_in_store>1</show_in_store>
+                                  </enabled>
+          						<key translate="label">
+          							<label>License Key</label>
+          							<comment></comment>
+          							<frontend_type>text</frontend_type>
+          							<sort_order>20</sort_order>
+          							<show_in_default>1</show_in_default>
+          							<show_in_website>1</show_in_website>
+          							<show_in_store>1</show_in_store>
+          							<can_be_empty>1</can_be_empty>
+          						</key>
+          						<use_responsive translate="label">
+                                      <label>Active Responsive Function</label>
+                                      <frontend_type>select</frontend_type>
+                                      <source_model>adminhtml/system_config_source_yesno</source_model>
+                                      <sort_order>25</sort_order>
+                                      <show_in_default>1</show_in_default>
+                                      <show_in_website>1</show_in_website>
+                                      <show_in_store>1</show_in_store>
+                                      <comment>Set to "Yes" if you are using responsive theme</comment>
+                                  </use_responsive>
+          						<include_jquery translate="label">
+                                      <label>Include Jquery</label>
+                                      <frontend_type>select</frontend_type>
+                                      <source_model>adminhtml/system_config_source_yesno</source_model>
+                                      <sort_order>30</sort_order>
+                                      <show_in_default>1</show_in_default>
+                                      <show_in_website>1</show_in_website>
+                                      <show_in_store>1</show_in_store>
+                                      <comment>Set to "Yes" if your site is not included jquery yet</comment>
+                                  </include_jquery>
+          						<include_bootstrap_js translate="label">
+                                      <label>Include Bootstrap Js</label>
+                                      <frontend_type>select</frontend_type>
+                                      <source_model>adminhtml/system_config_source_yesno</source_model>
+                                      <sort_order>35</sort_order>
+                                      <show_in_default>1</show_in_default>
+                                      <show_in_website>1</show_in_website>
+                                      <show_in_store>1</show_in_store>
+          							<comment>Set to "Yes" if your site is not included bootstrap js yet</comment>
+                                  </include_bootstrap_js>
+          						<hide_footer_links translate="label">
+                                      <label>Hide Footer Links</label>
+                                      <frontend_type>select</frontend_type>
+                                      <source_model>adminhtml/system_config_source_yesno</source_model>
+                                      <sort_order>40</sort_order>
+                                      <show_in_default>1</show_in_default>
+                                      <show_in_website>1</show_in_website>
+                                      <show_in_store>1</show_in_store>
+                                  </hide_footer_links>
+          					</fields>
+                </general>
+            </groups>
+        </magemenu>
+    </sections>
+</config>

@@ -1,0 +1,126 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ *
+ *
+ * Product list toolbar
+ *
+ * @see Mage_Catalog_Block_Product_List_Toolbar
+ */
+
+if( $this->getCollection()->getSize() ): ?>
+
+<?php if( $this->isExpanded() ): ?>
+
+  <div class="wrapper table toolbar">
+
+    <div class="table-cell fourth catalog-search" data-mobile-dropdown-parent="true">
+      <a href="#" data-mobile-dropdown="true">Search</a>
+      <div data-mobile-toggle-panel="true">
+        <?php echo Mage::getSingleton('core/layout')->createBlock('core/template')->setTemplate('catalogsearch/form.mini.phtml')->toHtml() ?>
+      </div>
+    </div>
+
+    <div class="table-cell three-fourth pagination">
+      <?php echo $this->getPagerHtml() ?>
+    </div>
+
+  </div>
+
+<?php endif; ?>
+
+
+<?php endif ?>
+
+
+
+<?php /*
+
+  <div class="table-cell fourth per-page">
+  		<select onchange="setLocation(this.value)" title="<?php echo $this->__('Results per page'); ?>">
+  		<?php foreach ( $this->getAvailableLimit() as $_key => $_limit ): ?>
+  			<option value="<?php echo $this->getLimitUrl($_key) ?>"<?php if($this->isLimitCurrent($_key)): ?> selected="selected"<?php endif ?>>
+  				<?php echo $_limit ?>
+  			</option>
+  		<?php endforeach; ?>
+  		</select>
+
+      <p class="pager-count">
+    		  <?php if($this->getLastPageNum()>1): ?>
+      				<?php echo $this->__('%s - %s of %s', $this->getFirstNum(), $this->getLastNum(), $this->getTotalNum()) ?>
+    			<?php else: ?>
+      				<?php echo $this->__('%s Item(s)', $this->getTotalNum()) ?>
+    			<?php endif; ?>
+      </p>
+    </div>
+
+
+  if( $this->isEnabledViewSwitcher() ): ?>
+
+  <li>
+    <div class="sorter">
+      <?php $_modes = $this->getModes(); ?>
+      <?php if($_modes && count($_modes)>1): ?>
+        <label><?php echo $this->__('View as') ?></label>
+        <?php foreach ($this->getModes() as $_code=>$_label): ?>
+          <?php if($this->isModeActive($_code)): ?>
+            <strong title="<?php echo $_label ?>" class="<?php echo strtolower($_code); ?>"><?php echo $_label ?></strong>
+          <?php else: ?>
+            <a href="<?php echo $this->getModeUrl($_code) ?>" title="<?php echo $_label ?>" class="<?php echo strtolower($_code); ?>"><?php echo $_label ?></a>
+          <?php endif; ?>
+        <?php endforeach; ?>
+      <?php endif; ?>
+    </div>
+  </li>
+
+<?php endif; */ ?>
+
+<?php /*
+
+
+  <li>
+    <a href="#" data-toggle-sort="true">Sort By</a>
+    <div class="sort-by">
+
+      <select onchange="setLocation(this.value)" title="<?php echo $this->__('Sort By') ?>">
+          <?php foreach( $this->getAvailableOrders() as $_key => $_order ): ?>
+              <option value="<?php echo $this->getOrderUrl($_key, 'asc') ?>"<?php if($this->isOrderCurrent($_key)): ?> selected="selected"<?php endif; ?>>
+                  <?php echo $this->__($_order) ?>
+              </option>
+          <?php endforeach; ?>
+      </select>
+      <?php if( $this->getCurrentDirection() == 'desc' ): ?>
+        <a href="<?php echo $this->getOrderUrl(null, 'asc') ?>" class="btn btn-gray sort-by-switcher sort-by-switcher--desc" title="<?php echo $this->__('Set Ascending Direction') ?>">
+          <?php echo $this->__('Sort Ascending') ?>&nbsp;&nbsp;<i class="fa fa-arrow-up"></i>
+        </a>
+      <?php else: ?>
+        <a href="<?php echo $this->getOrderUrl(null, 'desc') ?>" class="btn btn-gray sort-by-switcher sort-by-switcher--asc" title="<?php echo $this->__('Set Descending Direction') ?>">
+          <?php echo $this->__('Sort Descending ') ?>&nbsp;&nbsp;<i class="fa fa-arrow-down"></i>
+        </a>
+      <?php endif; ?>
+    </div>
+  </li>
+
+
+*/ ?>

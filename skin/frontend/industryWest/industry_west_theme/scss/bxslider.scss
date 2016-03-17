@@ -1,0 +1,286 @@
+/** INDUSTRY WEST SCSS THEME
+ *
+ * Site By:
+ *
+ * Version: 1.0.0
+ *
+ */
+
+@import 'variables';
+
+.bx-wrapper {
+	position: relative;
+	margin: 0 auto 0;
+	padding: 0;
+	*zoom: 1;
+	overflow:hidden;
+
+  & ul{
+    margin:0;
+    padding:0;
+  }
+
+  & li{
+    padding:0;
+    margin:0;
+    position:relative;
+    overflow:hidden;
+    height:auto;
+    background-color:#333333;
+  }
+
+  & .bx-slide-inner{
+    position:relative;
+  }
+
+  & .bx-slide-caption{
+    position:absolute;
+    display: table;
+    width:100%;
+    top:0;
+    z-index:99;
+    height:700px;
+    text-align:center;
+  }
+
+  & .bx-caption-inner{
+    display: table-cell;
+    vertical-align: middle;
+    padding-top:50px;
+  }
+
+  & img {
+  	max-width: 100%;
+  	display: block;
+  }
+
+  & .bx-viewport {
+  	-webkit-transform: translatez(0);
+  	-moz-transform: translatez(0);
+    -ms-transform: translatez(0);
+    -o-transform: translatez(0);
+    transform: translatez(0);
+    background-color:#333333;
+  }
+
+  & .bx-controls-direction a {
+  	position: absolute;
+  	top: 50%;
+  	margin-top: -16px;
+  	outline: 0;
+  	width: 32px;
+  	height: 32px;
+  	text-indent: -9999px;
+  	z-index: 9999;
+  }
+
+  & .bx-controls-direction a.disabled {
+  	display: none;
+  }
+
+  & .bx-controls{
+    position:absolute;
+    left:0;
+    right:0;
+    width:100%;
+    height:0;
+    top:50%;
+    z-index:999;
+  }
+
+  & .bx-controls .bx-next,
+  & .bx-controls .bx-prev{
+    position:absolute;
+    width:40px;
+    color:$darkGray;
+    margin-top:-50px;
+    height:100px;
+    opacity:0;
+
+    &:hover{
+
+    }
+  }
+
+  & .bx-controls .bx-prev{
+    left:0;
+    background:transparent ;
+    background:rgba(0,0,0,0.5)  url('../images/bg-slider-arrow-right.png') no-repeat center center;
+
+    &:hover{
+      opacity:1;
+    }
+  }
+
+  & .bx-controls .bx-next{
+    right:0;
+    background:transparent;
+    background:rgba(0,0,0,0.5)  url('../images/bg-slider-arrow-left.png') no-repeat center center;
+
+    &:hover{
+      opacity:1;
+    }
+  }
+}
+
+// MAIN HOME SLIDER
+.slider .bx-wrapper{
+
+  & li{
+    height:800px;
+  }
+
+  & .bx-controls{
+    margin-top:50px;
+  }
+
+  & .bx-controls .bx-prev{
+    right:-36px;
+    left:auto;
+  }
+
+  & .bx-controls .bx-next{
+    left:-36px;
+    right:auto;
+  }
+
+  &:hover .bx-prev,
+  &:hover .bx-next{
+    @include transition(all .3s);
+    opacity:1;
+  }
+
+  &:hover .bx-prev{
+    right:0;
+  }
+
+  &:hover .bx-next{
+    left:0;
+  }
+}
+
+.featured-products{
+
+  & .bx-wrapper{
+    position:static;
+  }
+
+  & li{
+    padding:0 10px;
+    height:auto;
+
+    @include below-800(){
+      width:100%;
+    }
+
+    @include below-600(){
+      padding: 0 15px;
+    }
+  }
+
+  & .bx-controls .bx-next,
+  & .bx-controls .bx-prev{
+    position:absolute;
+    width:13px;
+    color:$darkGray;
+    margin-top:-17px;
+    height:34px;
+    opacity:1;
+    transition:none;
+    background-position:  top;
+
+    &:hover{
+      transition:none;
+    }
+  }
+
+  & .bx-controls .bx-prev{
+    left:12px;
+    background: transparent url('../images/product-slider-arows.png') left top;
+
+    &:hover{
+      background-position: left bottom;
+    }
+  }
+
+  & .bx-controls .bx-next{
+    right:12px;
+    background: transparent url('../images/product-slider-arows.png') right top;
+
+    &:hover{
+      background-position: right bottom;
+    }
+  }
+}
+
+@include below-1700(){
+
+  .slider .bx-wrapper{
+
+    & li{
+      height:auto;
+      max-height:800px;
+    }
+  }
+
+}
+
+@include below-1280(){
+
+  #js-slideshow li {
+    height:630px;
+  }
+
+  #js-slideshow li img{
+    height:630px;
+    width:auto;
+    max-width: none;
+  }
+
+  #js-slideshow .bx-slide-caption{
+    height:630px;
+  }
+}
+
+@include below-1130(){
+
+  #js-slideshow li {
+    height:550px;
+  }
+
+  #js-slideshow li img{
+    height:100%;
+    width:auto;
+    max-width: none;
+  }
+
+   #js-slideshow .bx-slide-caption{
+    height:550px;
+  }
+}
+
+@include below-800(){
+
+  #js-slideshow li,
+  #js-slideshow .bx-slide-caption{
+    height:auto;
+  }
+
+  #js-slideshow .bx-slide-caption{
+    position:static;
+    display: block;
+    width:100%;
+    padding: 25px 50px;
+  }
+
+  #js-slideshow li img{
+    height:auto;
+    width:100%;
+  }
+
+  #js-slideshow li .bx-caption-inner{
+    padding:0;
+    display: block;
+    width:100%;
+  }
+}

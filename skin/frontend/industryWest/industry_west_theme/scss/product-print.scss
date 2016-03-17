@@ -1,0 +1,201 @@
+*{
+  position:static;
+  float:none;
+  font-size:16px;
+}
+
+@page {
+  margin: 0cm !important;
+}
+
+head,
+.cloud-zoom,
+.extra-product-info{
+  display:none;
+}
+
+[data-print]{
+  display:block !important;
+}
+
+* {
+	text-shadow: none !important;
+	filter: none !important;
+	-ms-filter: none !important;
+}
+
+pre, blockquote {
+	page-break-inside: avoid;
+}
+
+tr, img {
+	page-break-inside: avoid;
+}
+
+.wrapper{
+  padding:0;
+}
+
+.wrapper.global-notice,
+.wrapper.footer,
+.wrapper.breadcrumbs,
+.wrapper.utility,
+.navigation nav,
+script,
+#wrap,
+[data-tear-sheet],
+.product-stock-status,
+.extra-product-info,
+.wrapper.add-to-box,
+[data-tab-handles],
+li[data-tab-content].productcare,
+li[data-tab-content].warranty{
+  display:none !important;
+  background-color:transparent;
+}
+
+.wrapper.navigation{
+  background-color:transparent;
+}
+
+.wrapper.header{
+  background-color:#bbb;
+  padding: 0 25px;
+}
+
+.wrapper.more-views{
+  max-width:100%
+}
+
+.wrapper.more-views,
+.wrapper.product-image{
+  vertical-align:top;
+  display:inline-block;
+  margin-top:100px;
+}
+
+.wrapper.product-image {
+  width:30%;
+  text-align:left;
+  max-width:50%;
+  float:left;
+}
+
+.wrapper.more-views{
+  width:65%;
+}
+
+.container{
+  padding:0;
+}
+
+h1.product-title{
+  font-size:24px;
+}
+
+main{
+  position:relative;
+  padding:15px 0;
+}
+
+main p{
+  font-size:12.5px;
+}
+
+.table-cell{
+  display:block !important;
+  width:100% !important;
+}
+
+img{
+  max-width:450px;
+
+  &[data-main-print-img] {
+    width:500px;
+    max-width:500px;
+  }
+}
+
+a.logo{
+  background-color:transparent;
+  position:static !important;
+
+  &:after{
+    content: "Need Help? Call 800.382.9303 - Email us at info@industrywest.com";
+    float:right;
+    font-size:12px !important;
+    position: relative;
+    margin-top:-22px !important;
+  }
+}
+
+a.logo img{
+  width:200px !important;
+}
+
+.product-details{
+  clear:both;
+}
+
+.table-cell.product-price{
+  text-align: left;
+  padding:5px 0;
+}
+
+.product-header{
+  position: absolute;
+  top:0;
+  width:100%;
+  min-height:100px;
+}
+
+img[data-print-img]{
+  display: block;
+  width:100%;
+}
+
+li[data-tab-content]{
+  border:0 !important;
+  padding:15px 0 0 0;
+  font-size:12.5px !important;
+  font-weight:400 !important;
+  display: block !important;
+
+  & strong,
+  & table{
+    font-size:12.5px !important;
+    font-weight:500 !important;
+    color:#111;
+  }
+
+  &:first-child{
+    padding:0;
+  }
+
+  &:before{
+    font-size:14px;
+    font-weight:600;
+    padding-bottom:10px;
+    display: block;
+  }
+}
+
+li.product-image-thumbs{
+  width:30%;
+}
+
+.slick-slide{
+  display:none;
+
+  &.slick-active{
+    display:block !important;
+  }
+}
+
+li[data-tab-content].description:before{
+  content:"Description:";
+}
+
+li[data-tab-content].specs:before{
+  content:"Specs:"
+}

@@ -1,0 +1,55 @@
+/** INDUSTRY WEST SCSS THEME  Site By:  Version: 1.0.0  */
+table { display: table; table-layout: auto; width: 100%; }
+table thead { text-align: left; font-family: "proxima-nova-alt", "helvetica", sans-serif; font-weight: 700; font-size: 12px; color: #262626; text-transform: uppercase; letter-spacing: 2px; }
+table td { padding: 25px 8px; }
+table td:first-child { padding-left: 0; }
+table.cart-totals { color: #262626; font-size: 18px; margin-bottom: 15px; }
+table.cart-totals td { text-align: right; padding: 20px 35px 20px 0; font-family: "proxima-nova-alt", "helvetica", sans-serif; text-transform: uppercase; letter-spacing: 2px; font-size: 12px; font-weight: 700; }
+table.cart-totals tr { padding: 0 15px; }
+table.cart-totals tr.grand-total { background-color: #bfbfbf; }
+table.cart-totals tr.grand-total td { font-size: 18px; line-height: 1.2em; }
+table.cart-totals tr td:last-child { width: 40%; }
+table.cart-totals tfoot { background-color: #bfbfbf; }
+table.cart-totals tfoot td { font-size: 18px; line-height: 1.2em; }
+table.checkout-totals, table.past-order-totals { float: right; max-width: 50%; margin: 20px 0; color: #262626; background-color: #f3f3f3; }
+table.checkout-totals.onestep, table.past-order-totals.onestep { max-width: 100%; }
+table.checkout-totals td, table.past-order-totals td { text-align: right; padding: 15px; font-family: "proxima-nova-alt", "helvetica", sans-serif; text-transform: uppercase; letter-spacing: 2px; font-size: 12px; font-weight: 600; }
+table.checkout-totals tr, table.past-order-totals tr { padding: 0 15px; }
+table.checkout-totals tr td:last-child, table.past-order-totals tr td:last-child { width: 30%; }
+table.checkout-totals tfoot, table.past-order-totals tfoot { background-color: #bfbfbf; }
+table.checkout-totals tfoot td, table.past-order-totals tfoot td { font-size: 18px; }
+table.spec-table { table-layout: auto; }
+table.spec-table th, table.spec-table td { padding: 15px; font-size: 14px; line-height: 1.4em; }
+table.spec-table th { background-color: #f3f3f3; color: #262626; font-family: "proxima-nova-alt", "helvetica", sans-serif; font-weight: 600; width: 30%; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+table.spec-table td { border: 1px solid #f3f3f3; }
+@media only screen and (max-width: 1024px) { table.checkout-totals, table.past-order-totals { max-width: 75%; } }
+@media only screen and (max-width: 800px) { table.checkout-totals, table.past-order-totals { float: none; max-width: 100%; } }
+
+.data-table { table-layout: auto; display: table; width: 100%; }
+.data-table tbody { border-top: 3px solid #262626; }
+.data-table tbody tr { border-bottom: 3px solid #262626; }
+.data-table tbody td { vertical-align: top; }
+.data-table th { text-align: right; padding: 4px 8px; }
+.data-table th:first-child { text-align: left; padding-left: 0; }
+.data-table th.a-center { text-align: center; }
+.data-table td { text-align: right; width: auto; }
+.data-table.cart .cart-product-image { width: 125px; }
+.data-table.cart .cart-product-actions { width: auto; padding-right: 0; padding-left: 15px; }
+.data-table.cart .cart-product-info { min-width: 25%; text-align: left; padding-right: 30px; }
+.data-table.cart .cart-product-total { width: auto; }
+@media only screen and (max-width: 800px) { .data-table.cart { table-layout: fixed; }
+  .data-table.cart td { white-space: normal; }
+  .data-table.cart .cart-product-info { width: 150px; }
+  .data-table.cart .cart-product-image { width: 100px; } }
+@media only screen and (max-width: 600px) { .data-table.cart { table-layout: fixed; }
+  .data-table.cart td { white-space: wrap; }
+  .data-table.cart td.cart-product-image, .data-table.cart .cart-product-pricing, .data-table.cart th.cart-product-info { display: none; width: auto; max-width: 0; }
+  .data-table.cart th.cart-product-image { width: 40%; }
+  .data-table.cart td.cart-product-info { width: 40%; padding-left: 0; white-space: normal; } }
+.data-table.past-orders, .data-table.past-order-review { table-layout: auto; margin-top: 25px; }
+.data-table.past-orders td, .data-table.past-order-review td { vertical-align: top; }
+.data-table.past-orders .order-actions, .data-table.past-order-review .order-actions { width: 150px; text-align: right; padding-right: 0; }
+.data-table.past-order-review td:first-child { text-align: left; }
+@media only screen and (max-width: 800px) { .data-table.past-orders .order-date, .data-table.past-orders .order-ship, .data-table.past-orders .order-total { display: none; }
+  .data-table.past-order-review .past-order-sku, .data-table.past-order-review .past-order-price { display: none; }
+  .data-table.checkout-review td.review-product-name { text-align: left; } }

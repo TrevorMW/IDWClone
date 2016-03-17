@@ -1,0 +1,29 @@
+<?php
+/**
+ * magemenu/menuitem/node.phtml
+ *
+ * @package OnlineBiz_MageMenu
+
+ * @version 1.5.0
+ *
+ */
+?>
+
+<li<?php echo $this->getElementOptions('li') ?>>
+	<a<?php echo $this->getElementOptions('li.a') ?>>
+		<?php if($this->hasElementOptions('li.a.img')): ?>
+			<img<?php echo $this->getElementOptions('li.a.img') ?> />
+		<?php endif; ?>
+		<?php echo $this->getName() ?>
+	</a>
+	<?php if($this->hasChildren()): ?>
+	<div class="sub-menu sub-menu-<?php echo $this->getLevel() ?>">
+  	<ul class="level<?php echo $this->getLevel() ?> <?php echo $this->getCmsBlockClass()?>" style="<?php echo $this->getCmsBlockStyle()?>">
+  		<?php foreach($this->getChildren() as $child ): ?>
+  		<?php echo $child->toHtml() ?>
+  		<?php endforeach; ?>
+  	</ul>
+	</div>
+	<?php endif; ?>
+</li>
+

@@ -1,0 +1,197 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ *
+ * Product media data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ */
+
+$_product = $this->getProduct();
+$_helper  = $this->helper('catalog/output');
+
+$_small_image_width  = 150;
+$_small_image_height = 150;
+$_large_image_width  = 550;
+$_large_image_height = 550;
+$_zoom_image_width   = 800;
+$_zoom_image_height  = 800; ?>
+
+
+<script type="text/javascript">
+  var slick = '';
+</script>
+
+<?php if (Mage::getStoreConfig('attributeswatches/lightbox/enabled')):?>
+
+  <script type="text/javascript">
+    //<![CDATA[
+    jQuery(function()
+    {
+      if ( jQuery.fancybox != undefined )
+      {
+        jQuery("#main-image-link, a#fancybox-link").on("click",function()
+        {
+          /* create array of images */
+          _images = new Array();
+          _first_image = jQuery("a#main-image-link").attr("href");
+
+          _images.push({
+              "href": _first_image ,
+              "title": jQuery("a#main-image-link").attr("title")
+          });
+
+          jQuery("a.fancybox:visible").each(function()
+          {
+            if( jQuery(this).attr("rel") != "" && jQuery(this).attr("rel") != _first_image )
+            {
+              _images.push({
+                  "href": jQuery(this).attr("rel") ,
+                  "title": jQuery(this).attr("title")
+              });
+            }
+          });
+
+          jQuery.fancybox.open( _images, { "openEffect":"none", "closeEffect":  "none", "nextEffect": "fade", "prevEffect":"fade" });
+
+          return false;
+        });
+      }
+    });
+    //]]>
+  </script>
+
+<?php endif; ?>
+
+<?php
+/* if fancybox plugin is enabled */
+$_cloudzoom_options = "";
+
+if (Mage::getStoreConfig('attributeswatches/cloudzoom/enabled')):
+
+  $_cloudzoom_options = "position: 'inside' ,autoInside: true, tint:'#FFFFFF', softFocus:false, smoothMove:5, tintOpacity:0.4"; ?>
+
+  <!-- Call quick start function. -->
+  <script type="text/javascript">
+  //<![CDATA[
+    var cloudZoom = '';
+
+    jQuery(document).ready(function()
+    {
+      if (jQuery.fn.CloudZoom !== undefined )
+      {
+        cloudZoom = jQuery('#main-image-link').CloudZoom({<?php echo $_cloudzoom_options;?>});
+
+        if (jQuery.fancybox != undefined)
+        {
+          jQuery("#fancybox-link").show();
+        }
+      }
+    });
+
+  //]]>
+  </script>
+<?php endif;
+
+
+
+//////////////////////
+// BUILD PRODUCT ZOOM
+//////////////////////
+
+if ($_product->getImage() != 'no_selection' && $_product->getImage()):
+
+  $img_helper = $this->helper('catalog/image')->init($_product, 'image');
+
+  $cloudzoom    = '<img class="cloudzoom" id="image" src="'.$img_helper->resize($_zoom_image_width).'" alt="'.$this->htmlEscape($this->getImageLabel()).'" />';
+  $no_cloudzoom = '<img id="image" src="'.$img_helper->resize($_large_image_width).'" alt="'.$this->htmlEscape($this->getImageLabel()).'" />'; ?>
+
+  <div class="wrapper product-image">
+    <a class="fancybox-main cloud-zoom" id="main-image-link" href="<?php echo $img_helper->resize($_zoom_image_width); ?>" rel="<?php echo $_cloudzoom_options; ?>">
+      <?php echo $cloudzoom //$_helper->productAttribute($_product, $cloudzoom, 'image'); ?>
+    </a>
+    <img src="<?php echo $img_helper->resize($_zoom_image_width); ?>" alt="" data-print-img="true" data-main-print-img="true" />
+    <a id='fancybox-link' href='#'><?php echo $this->__("+ Enlarge"); ?></a>
+  </div>
+
+<?php else: ?>
+
+  <div class="wrapper product-image">
+    <a class="fancybox-main" id="main-image-link" href="<?php echo $this->helper('catalog/image')->init($_product, 'image'); ?>" title="<?php echo $this->htmlEscape($this->getImageLabel()); ?>">
+      <?php echo $_helper->productAttribute($_product, $no_cloudzoom, 'image'); ?>
+      <?php echo $no_cloudzoom;?>
+    </a>
+    <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize($_zoom_image_width); ?>" alt="" data-print-img="true" />
+    <a id='fancybox-link' href='#'><?php echo $this->__("+ Enlarge"); ?></a>
+  </div>
+
+<?php endif;
+
+
+
+
+///////////////////////////
+// BUILD PRODUCT THUMBNAILS
+///////////////////////////
+
+if ( count( $this->getGalleryImages() ) > 0 ):
+
+  $typeID = $_product->getTypeId();
+
+  $mediaImages = '';
+
+  $typeID == 'configurable' ? $mediaImages = $_product->getProductCombinedGallery() : $mediaImages = $_product->getMediaGalleryImages() ;
+
+  // GET NEW IMAGE COLLECTION WITH 'type' PARAMETER ADDED in mango/AttributeSwatches/model/product.php
+
+  $img_helper = $this->helper('catalog/image');
+  $slider = ''; ?>
+
+    <div class="wrapper more-views">
+      <ul data-product-thumbs="true" data-product-type="<?php echo $typeID ?>">
+        <?php foreach ( $mediaImages as $_image ):
+
+          $classes    = '';
+          $_attr      = $_image->getAssociatedAttributes();
+          $img_helper = $img_helper->init($this->getProduct(), 'thumbnail', $_image->file);
+
+          $_image->type  == 'configurable' ? $classes .= 'configurable' : $classes .= ' simple' ; ?>
+
+          <li class="<?php echo $_attr; ?> <?php echo $classes; ?> product-image-thumbs">
+            <a class="fancybox"
+               href="<?php echo $img_helper->resize($_large_image_width); ?>"
+               rel="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->file)->resize($_zoom_image_width); ?>">
+              <img src="<?php echo $img_helper->resize($_small_image_width); ?>" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>" />
+            </a>
+          </li>
+
+        <?php endforeach; ?>
+      </ul>
+    </div>
+
+<?php endif;  ?>
+
+
+
+

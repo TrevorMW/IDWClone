@@ -1,0 +1,118 @@
+<?php
+
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     industryWest
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ *
+ * Template for Mage_Page_Block_Html
+ *
+ */
+
+$page = Mage::app()->getFrontController()->getRequest()->getRequestString();
+$page = str_replace( '/','', $page );
+
+$rel_url = $this->getData('banner_url');
+$caption = $this->getData('banner_caption');
+$caption_copy = $this->getData('banner_caption_copy'); ?>
+
+<div class="wrapper banner inner">
+
+  <?php if( $rel_url != null ) { ?>
+    <img src="<?php echo $this->getSkinUrl($rel_url); ?>" alt="" />
+  <?php } ?>
+
+  <?php if( $caption != null ) { ?>
+    <div class="wrapper banner-caption <?php $caption != false ? print 'table' : print '' ;?> ">
+       <div class="table-cell banner-caption-inner first">
+          <div class="container">
+            <h2><?php echo $caption; ?></h2>
+            <p><?php echo $caption_copy; ?></p>
+          </div>
+        </div>
+    </div>
+  <?php } ?>
+
+  <?php if( $page == "our-story" ){ ?>
+    <div class="wrapper scroll-to-anchor banner-anchor">
+      <div class="scroll-anchor-link">
+        <a href="#" class="btn" data-scroll-to="true" data-scroll-to-anchor="js-our-approach"><i class="fa fa-chevron-down"></i></a>
+      </div>
+    </div>
+  <?php } ?>
+
+</div>
+
+<?php if( $page == "our-story" ){ ?>
+
+  <div class="wrapper banner inner" id="js-our-approach">
+
+    <?php if( $rel_url != null ) { ?>
+      <img src="<?php echo $this->getSkinUrl('images/banner-our-approach.jpg'); ?>" alt="" />
+    <?php } ?>
+
+    <?php if( $caption != null ) { ?>
+      <div class="wrapper banner-caption <?php $caption != false ? print 'table' : print '' ;?> ">
+         <div class="table-cell banner-caption-inner">
+            <div class="container">
+              <div class="banner-caption-content">
+                <h2>Our Approach</h2>
+                <p>Industry West is a solution: Quality design should be accessible to everyone. We dispel the myth that good design is synonymous with exclusivity and unattainability. </p>
+                <p>By doing away with the overhead costs of brick and mortar stores and excessive marketing and advertising, Industry West provides a streamlined retail experience, affordable products and innovative design.</p>
+              </div>
+            </div>
+          </div>
+      </div>
+    <?php } ?>
+
+      <div class="wrapper scroll-to-anchor banner-anchor">
+        <div class="scroll-anchor-link">
+          <a href="#" class="btn" data-scroll-to="true" data-scroll-to-anchor="js-giving-back"><i class="fa fa-chevron-down"></i></a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="wrapper banner inner" id="js-giving-back">
+
+    <?php if( $rel_url != null ) { ?>
+      <img src="<?php echo $this->getSkinUrl('images/banner-giving-back.jpg'); ?>" alt="" />
+    <?php } ?>
+
+    <?php if( $caption != null ) { ?>
+      <div class="wrapper banner-caption <?php $caption != false ? print 'table' : print '' ;?> ">
+         <div class="table-cell banner-caption-inner" >
+            <div class="container">
+              <div class="banner-caption-content right">
+                <h2>Giving Back</h2>
+                <p>At Industry West, giving back was never an afterthought - it was always part of our business plan, from the start. We knew that ‘giving back’ could be creative, and we want to support organizations that help children, family, the arts, and community-building so that we can nurture that same sense of creativity in others.</p>
+                <p>Giving Back is a core value of Industry West: It’s as important to us and what we do as the design, quality, and value of our products.</p>
+                <!-- <a href="/latest-collaborators" class="btn btn-clear">SEE OUR LATEST NON-PROFIT COLLABORATIONS</a> -->
+              </div>
+            </div>
+          </div>
+      </div>
+    <?php } ?>
+
+  </div>
+
+<?php } ?>

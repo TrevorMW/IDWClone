@@ -1,0 +1,478 @@
+/** INDUSTRY WEST SCSS THEME
+ *
+ * Site By:
+ *
+ * Version: 1.0.0
+ *
+ */
+
+
+@import 'variables';
+
+nav{
+
+	& a,
+	& a:visited{
+		text-transform:uppercase;
+		color:#fff;
+	}
+
+	&.main{
+
+		& ul{
+			width:100%;
+
+			&.left,
+			&.right{
+				display:inline-block;
+				vertical-align: middle;
+				width:49.5%;
+
+				@include below-1024() {
+  			  display:none;
+        }
+			}
+
+			&.right{
+				float:right;
+				text-align: right;
+			}
+		}
+
+		& .sub-menu{
+  		display:none;
+    	position:absolute;
+    	z-index:999;
+    	background-color:#fff;
+    	color:#000;
+    	padding:0;
+    	width:100%;
+    	left:0;
+    	right:0;
+    	top:100%;
+      -webkit-box-shadow: 0px 4px 5px -4px rgba(0, 0, 0, 0.5);
+      -moz-box-shadow:    0px 4px 5px -4px rgba(0, 0, 0, 0.5);
+      box-shadow:         0px 4px 5px -4px rgba(0, 0, 0, 0.5);
+
+      @include below-1280(){
+        padding: 0 15px;
+      }
+  	}
+
+    .sub-menu ul{
+  		max-width:1250px;
+  		margin:0 auto;
+  		padding:15px 0;
+  		text-align: left;
+    }
+
+    .right .sub-menu ul{
+      text-align: right;
+      padding-right:80px;
+      background:url('../images/bg-legend-accent-right.png') no-repeat right 50px top 22px;
+    }
+
+  	.left .sub-menu ul{
+      text-align: left;
+      padding-left:70px;
+    	background:url('../images/bg-legend-accent.jpg') no-repeat left 50px top 22px;
+  	}
+
+		& li{
+			display:inline-block;
+			width:auto;
+			text-align:center;
+		}
+
+		.sub-menu li{
+    	display: inline-block;
+    	width:auto;
+    	padding-left:20px;
+
+    	&:first-child{
+      	padding-left:10px;
+    	}
+  	}
+
+		& a,
+		& a:visited{
+  		position:relative;
+			padding:35px 35px;
+			letter-spacing:2px;
+
+			@include below-1130()
+      {
+        padding: 35px 25px;
+      }
+
+			&:hover{
+				background-color:$darkGray;
+			}
+		}
+
+		.sub-menu a{
+  	  color:$darkGray;
+    	font-size:12px;
+    	font-weight:700;
+    	letter-spacing:2px;
+    	text-transform: uppercase;
+    	padding:10px 0;
+
+    	&:hover,
+    	.sub-menu.active &{
+      	color:$tangerine;
+      	background-color:transparent;
+    	}
+		}
+
+		& .active a,
+		& a:hover{
+
+			&:after{
+				content:"";
+				position:absolute;
+				left:50%;
+				margin-left:-10px;
+				bottom:0;
+				border-left:10px solid transparent;
+				border-right:10px solid transparent;
+				border-bottom:10px solid #fff;
+			}
+		}
+
+		& .parent a:after{
+  		display: none;
+		}
+
+		& li li a{
+  		color:#000;
+		}
+	}
+
+	&.utility-nav{
+
+		& li{
+			vertical-align: middle;
+			margin-left:15px;
+			padding:20px 0;
+
+			&:last-child{
+
+  			& i{
+    			font-size:18px;
+    			vertical-align:middle;
+    		}
+			}
+		}
+
+		& a,
+		& a:visited{
+			padding: 0 15px 0 0;
+			letter-spacing:2px;
+			font-weight:500;
+
+			& i{
+  			font-size:12px;
+  			vertical-align:middle;
+  		}
+
+			&:hover{
+  			color:$tangerine;
+  			font-weight:500;
+			}
+
+			&.disabled{
+  			display: none;
+			}
+
+			.gray &:hover{
+  			color:$darkGray;
+  			font-weight:500;
+			}
+		}
+
+		& li#js-search-box{
+			@include transition(all .4s);
+		  margin:0;
+		  padding:0;
+      width:0;
+		  display:none;
+
+			&.active{
+				width:250px;
+				display:inline-block;
+			}
+
+			& a{
+				padding:0;
+			}
+		}
+	}
+
+	.mobile-nav &{
+  	max-height:80%;
+  	overflow-y:scroll;
+
+  	& ul{
+      display:block;
+      width:100%;
+
+      & ul{
+        display:none;
+        background-color:$lightGray;
+      }
+  	}
+
+  	& li{
+    	margin:0;
+    	padding:0;
+      display:block;
+      width:100%;
+      border-top:2px solid $lightGray;
+
+      & li{
+        border:0;
+      }
+  	}
+
+  	& a,
+  	& a:visited{
+      color:$darkGray;
+      font-family:$headingFont;
+      font-size:16px;
+      padding:20px;
+      font-weight:600;
+
+      &:hover,
+      &:focus{
+        color:$tangerine
+      }
+  	}
+
+  	li.parent > a{
+      background: url('../images/plus.png') no-repeat right 25px center;
+      background-size:8px 8px;
+    }
+
+    li.active-parent > a{
+      background: url('../images/minus.png') no-repeat right 25px center;
+      background-size:8px 8px;
+    }
+
+  	& .sub-menu a,
+    & .sub-menu a:visited{
+      font-size:12px;
+      padding:14px 20px;
+    }
+	}
+
+	&.account-links{
+
+	 & ul{
+		 padding: 0;
+		 margin:0;
+	 }
+
+	 & li{
+		 display:block;
+		 width:100%;
+		 margin-bottom:10px;
+	 }
+
+	}
+
+	&.catalog-categories{
+
+  	& ul{
+      padding-left:15px;
+      background: url('../images/bg-black-arrow.png') no-repeat left top 22px;
+      background-size:6px 17px;
+  	}
+
+  	& li{
+      display: inline-block;
+
+      & a,
+    	& a:visited{
+      	color:$darkGray;
+      	font-weight:600;
+      	font-size:10px;
+      	font-family:$headingFont;
+      	padding: 25px 14px;
+
+      	&:hover{
+        	color:$tangerine;
+      	}
+    	}
+  	}
+
+  	li.active a{
+      color:$tangerine;
+    }
+	}
+
+	&.footer{
+
+  	@include below-1024(){
+    	display: block;
+    	width:100%;
+  	}
+
+		& ul{
+			width:100%;
+			padding-left:10px;
+
+			@include below-1130(){
+        text-align: left;
+			}
+		}
+
+		& li{
+			margin-right:3%;
+			width:auto;
+
+		  @include below-1280(){
+  			margin-right:2.6%;
+			}
+
+			@include below-1130(){
+        margin-right:2%;
+			}
+
+			@include below-1024(){
+        display: block;
+        width:100%;
+        margin:0;
+        padding: 10px 0;
+			}
+
+			&:last-child{
+				margin-right:0;
+			}
+		}
+
+		& a,
+		& a:visited{
+
+  		&:hover{
+    		color:$tangerine;
+  		}
+
+  		@include below-1130(){
+        font-size:12px;
+			}
+
+			@include below-1024(){
+        font-size:14px
+			}
+		}
+	}
+
+  @include below-1130(){
+
+    &.catalog-categories{
+      padding:0;
+
+      & ul{
+        padding-left:15px;
+        background-position: 8px 22px
+      }
+
+      & li{
+
+        & a,
+        & a:visited{
+          padding:25px 15px;
+        }
+      }
+    }
+
+  }
+
+	@include below-1024(){
+
+    &.catalog-categories{
+      padding:0;
+
+      & ul{
+        padding:0;
+        background:none;
+        display: none;
+      }
+
+      & li{
+        display: block;
+        width:100%;
+        border-top:2px solid $lightGray;
+
+        & a,
+        & a:visited{
+          padding:10px 25px;
+        }
+      }
+    }
+
+    .utility.gray &.utility-nav ul li a:hover{
+      color:$tangerine;
+    }
+
+    &.footer{
+
+      & ul{
+        text-align: center;
+      }
+    }
+  }
+
+	@include below-600(){
+
+    &.utility-nav{
+
+      & li#js-search-box{
+      	position:absolute;
+      	left:0;
+      	top:-45px;
+      	width:100%;
+
+
+      	&.mobile-active{
+        	display:block;
+      	}
+      }
+
+      & ul{
+        width:100%;
+      }
+
+      & li{
+        width:auto;
+        margin-left:25px;
+
+        & a{
+          padding-right:0;
+        }
+
+        &:first-child{
+          float:left;
+          margin-left:0;
+
+          & i{
+            display: inline-block;
+            margin-top:1px;
+            font-size:15px;
+
+            &.inactive{
+              display:none;
+            }
+          }
+        }
+      }
+    }
+
+    &.catalog-categories{
+      display:none;
+    }
+
+  }
+
+}

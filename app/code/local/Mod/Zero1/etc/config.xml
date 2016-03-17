@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Mod_Zero1>
+            <version>0.1.0</version>
+        </Mod_Zero1>
+    </modules>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Mod_Zero1 before="Zero1_Seoredirects">Mod_Zero1_Adminhtml</Mod_Zero1>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <seoredirects translate="title" module="zero1_seo_redirects">
+                                        <title>SEO Redirect</title>
+                                    </seoredirects>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <catalog>
+                        <children>
+                            <seoredirects translate="title" module="zero1_seo_redirects">
+                                <title>SEO Redirects</title>
+                                <children>
+                                    <seoredirects_manage translate="title" module="zero1_seo_redirects">
+                                        <title>Manage Redirections</title>
+                                    </seoredirects_manage>
+                                    <import translate="title" module="zero1_seo_redirects">
+                                        <title>Import</title>
+                                    </import>
+                                </children>
+                            </seoredirects>
+                        </children>
+                    </catalog>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    </adminhtml>
+</config>

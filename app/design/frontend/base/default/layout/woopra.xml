@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Woopra Module for Magento
+ *
+ * @package     Woopra_Analytics
+ * @author      K3Live for Woopra
+ * @copyright   Copyright (c) 2015 Woopra (http://www.woopra.com/)
+ * @license     Open Software License (OSL 3.0)
+ */
+-->
+<layout>
+    <default>
+        <reference name="head">
+            <block type="woopra/script" name="woopra" as="woopra" template="woopra/script.phtml"/>
+        </reference>
+        <reference name="before_body_end">
+            <block type="woopra/script" name="woopraCheckout" as="woopraCheckout" template="woopra/checkout.phtml"/>
+        </reference>
+    </default>
+</layout>

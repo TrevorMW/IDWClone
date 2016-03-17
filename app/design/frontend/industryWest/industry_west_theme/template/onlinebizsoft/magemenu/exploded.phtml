@@ -1,0 +1,40 @@
+<?php 
+$this->setImageAsBackground(true);
+$this->getBlock()->addElementOptions('class', 'div', array('magemenu-menu', 'nav-exploded navbar onlinebiz-magemenu'));
+
+?>
+<style>
+.exploded-menu-block .column {width:<?php echo $this->getPopupColumnWidth() ? $this->getPopupColumnWidth() : 120?>px}
+.explodedmenu-menu-popup {background-color:#<?php echo $this->getBackgroundColor()?>}
+</style>
+<div<?php echo $this->getBlock()->getElementOptions('div') ?>>
+    <div class="header-nav">
+        <h4 class="no-display"><?php echo $this->getName() ?></h4>
+		<ul class="nav-exploded" id="explodedmenu">
+			<?php foreach ($this->getMenuNodes() as $key => $node): ?>
+				<?php echo $this->drawExplodedMenuItem($node) ?>
+			<?php endforeach ?>
+	    </ul>	
+    </div>
+</div>
+<?php if(Mage::getStoreConfig('magemenu/general/use_responsive')):?>
+<div class="nav-accordion magemenu-responsive">
+    <div class="navbar-inner">
+		<a class="responsivebar show-responsive-bar"><?php echo $this->__('Menu')?></a>
+		<div class="nav-collapse">
+			<ul class="nav nav-tabs  nav-stacked accordion" id="accordion">
+				<?php foreach ($this->getMenuNodes() as $key => $node): ?>
+					<?php echo $this->drawResponsiveMenuItem($node) ?>
+				<?php endforeach ?>
+			</ul>
+		</div>
+    </div>
+</div>
+<?php endif;?>
+<script type="text/javascript">
+//<![CDATA[
+var EXPLODEDMENU_POPUP_WIDTH = <?php echo $this->getPopupWidth() ? (int)$this->getPopupWidth() : 0?>;
+var EXPLODEDMENU_POPUP_TOP_OFFSET = 33;
+var EXPLODEDMENU_POPUP_RIGHT_OFFSET_MIN = 48;
+//]]>
+</script>

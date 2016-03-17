@@ -1,0 +1,47 @@
+<div id="onestepcheckout-login-popup" data-popup="login" data-mode="login" class="wrap table popup">
+  <div class="table-cell popup-background">
+    <div class="popup-body">
+      <header data-header-mode="true" class="popup-header">
+        <div class="table-cell">
+          <h1 class="popup-title active"><?php echo $this->__('Login'); ?></h1>
+          <h1 class="popup-title"><?php echo $this->__('Forgotten your password?'); ?></h1>
+        </div>
+        <div class="table-cell"><a href="#" id="popup-close-link" data-popup-close="true"><i class="fa fa-times"></i></a></div>
+      </header>
+      <div class="popup-body-inner">
+        <div class="popup-errors" data-popup-errors="true"></div>
+
+        <form class="active-form" id="login" data-login-form="true" action="" data-action="<?php echo $this->getUrl('onestepcheckout/ajax/login', array( '_secure' => true) ); ?>">
+          <ul>
+            <li class="full">
+              <label for="onestepcheckout_username"><?php echo $this->__('Username:'); ?></label>
+              <input tabindex="100" type="text" class="input-text" name="onestepcheckout_username" id="onestepcheckout_username" />
+            </li>
+            <li class="full">
+              <label for="onestepcheckout_password"><?php echo $this->__('Password:'); ?></label>
+              <input type="password" tabindex="101" name="onestepcheckout_password" class="input-text" id="onestepcheckout_password" />
+            </li>
+            <li class="submit">
+              <a href="#" data-switch-form-mode="password" class="action forgot-action"><?php echo $this->__('Forgotten your password?'); ?></a>
+              <button type="submit" class="btn btn-orange"><?php echo $this->__('Login'); ?></button>
+            </li>
+          </ul>
+        </form>
+
+        <form id="password" data-forgot-form="true" data-action="<?php echo $this->getUrl('onestepcheckout/ajax/forgotPassword', array( '_secure' => true ) ); ?>" >
+          <ul>
+            <li class="full">
+              <label for="id_onestepcheckout_email"><?php echo $this->__('Email address:'); ?></label>
+              <input type="text" class="input-text" name="onestepcheckout_email" id="id_onestepcheckout_email" />
+            </li>
+            <li class="submit">
+              <a href="#" data-switch-form-mode="login" class="action forgot-action"><?php echo $this->__('Return to login'); ?></a>
+              <button type="submit" class="btn btn-orange"><?php echo $this->__('Send password'); ?></button>
+            </li>
+          </ul>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

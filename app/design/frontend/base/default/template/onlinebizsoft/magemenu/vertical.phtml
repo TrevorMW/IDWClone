@@ -1,0 +1,55 @@
+<?php 
+/**
+ * Vertical Menu for MenuCreator
+ *
+ * @see OnlineBiz_MageMenu_Block_Menuitem
+ */
+$this->setImageAsBackground(true);
+
+// Magento 1.4 and greater
+if(version_compare(Mage::getVersion(), '1.4.0.0', '>=')): 
+$this->getBlock()->addElementOptions('class', 'div', array('block', 'magemenu-menu navbar onlinebiz-magemenu'));
+?>
+
+<div<?php echo $this->getBlock()->getElementOptions('div') ?>>
+    <div class="block-title<?php echo ! $this->getData('display_name') ? ' no-display' : '' ?>">
+        <strong><span><?php echo $this->__($this->getData('name')) ?></span></strong>
+
+    </div>
+    <div class="block-content">
+		<ul class="nav-vertical">
+			<?php echo $this->getMenu() ?>
+	    </ul>
+    </div>
+</div>
+
+<?php 
+else: // Magento 1.3
+$this->getBlock()->addElementOptions('class', 'div', array('box', 'base-mini', 'magemenu-menu navbar onlinebiz-magemenu'));
+?>
+
+<div<?php echo $this->getBlock()->getElementOptions('div') ?>>
+    <div class="head<?php echo ! $this->getData('display_name') ? ' no-display' : '' ?>">
+            <h4><?php echo $this->__($this->getData('name')) ?></h4>
+    </div>
+    <div class="content">
+		<ul class="nav-vertical">
+			<?php echo $this->getMenu() ?>
+	    </ul>	
+	</div>
+</div>
+<?php endif; ?>
+<?php if(Mage::getStoreConfig('magemenu/general/use_responsive')):?>
+<div class="nav-accordion magemenu-responsive">
+    <div class="navbar-inner">
+		<a class="responsivebar show-responsive-bar"><?php echo $this->__('Menu')?></a>
+		<div class="nav-collapse">
+			<ul class="nav nav-tabs  nav-stacked accordion" id="accordion">
+				<?php foreach ($this->getMenuNodes() as $key => $node): ?>
+					<?php echo $this->drawResponsiveMenuItem($node) ?>
+				<?php endforeach ?>
+			</ul>
+		</div>
+    </div>
+</div>
+<?php endif;?>

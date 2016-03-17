@@ -1,0 +1,84 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+$route = '';
+
+$route = $this->getRequest()->getModuleName().'_'.$this->getRequest()->getControllerName().'_'.$this->getRequest()->getActionName();
+
+echo $this->getChildHtml('footer_top') ?>
+
+  <div class="wrapper footer bottom" data-footer="true">
+  	<footer class="container">
+  		<div class="col half copyright"><p>&copy; <?php echo date("Y") ?> Industry West, All Rights Reserved </p></div>
+  		<div class="col half right credits">
+  		    <a href="http://blog.industrywest.com">Blog</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  		    <a href="/contacts/index/index">Contact Us</a>
+  		    <a href="http://cobblehilldigital.com" target="_blank" style="display:none;">Site by Cobble Hill</a>
+  		</div>
+  	</footer>
+  </div>
+
+</div>
+
+<div class="wrap mobile-nav" data-mobile-nav-wrap="true"></div>
+
+<?php echo $this->getAbsoluteFooter() ?>
+
+<?php echo $this->getChildHtml('newsletter_signup') ?>
+
+<!-- Start of Async HubSpot Analytics Code -->
+  <script type="text/javascript">
+    (function(d,s,i,r) {
+      if (d.getElementById(i)){return;}
+      var n=d.createElement(s),e=d.getElementsByTagName(s)[0];
+      n.id=i;n.src='//js.hs-analytics.net/analytics/'+(Math.ceil(new Date()/r)*r)+'/748292.js';
+      e.parentNode.insertBefore(n, e);
+    })(document,"script","hs-analytics",300000);
+  </script>
+<!-- End of Async HubSpot Analytics Code -->
+
+<script type="text/javascript">
+;(function($, window, undefined)
+{
+  $(document).ready(function()
+  {
+    _googWcmGet( 'googleforwardnumber', '800-382-9303' );
+  })
+
+})(jQuery, window);
+</script>
+
+<script type="text/javascript">
+setTimeout(function(){var a=document.createElement("script");
+var b=document.getElementsByTagName("script")[0];
+a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0032/1131.js?"+Math.floor(new Date().getTime()/3600000);
+a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>
+
+
+<?php if( $route == 'checkout_onepage_success' ) : ?>
+<img height="1" width="1" alt="" src="https://ct.pinterest.com/?tid=6L42gnxezEB"/>
+<?php endif; ?>

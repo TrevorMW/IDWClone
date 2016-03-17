@@ -1,0 +1,249 @@
+/** INDUSTRY WEST SCSS THEME
+ *
+ * Site By:
+ *
+ * Version: 1.0.0
+ *
+ */
+
+@import 'variables';
+
+a.btn,
+button.btn{
+	display: inline-block;
+	width:auto;
+	text-align: center;
+	padding: 13px 25px 15px 25px;
+	border:2px solid $darkGray;
+	font-size:18px;
+	font-family:$accentFont;
+	text-transform:uppercase;
+	letter-spacing:2px;
+	color:$darkGray;
+	line-height:18px;
+	@include transition(all .4s);
+	background-color:transparent;
+	cursor:pointer;
+	position: relative;
+
+	&.btn-block{
+    display:block;
+    width:100%;
+  }
+
+  &.btn-black{
+    background-color:#000;
+    color:#fff;
+    border-color:transparent;
+
+    &.btn-social{
+      padding:10px;
+      min-width:50px;
+      text-align: center;
+    }
+
+    &:hover{
+
+    }
+  }
+
+  &.btn-gray{
+    background-color:$lightGray;
+    border:0;
+    font-size:12px;
+    font-family:$headingFont;
+    letter-spacing:2px;
+    font-weight:600;
+
+    &:hover{
+      background-color:$tangerine;
+    }
+  }
+
+  &:hover{
+  	background-color:$tangerine;
+  	color:#fff;
+  	border-color:$tangerine;
+	}
+
+  &.btn-orange{
+    background-color:$tangerine;
+    color:#fff;
+    border-color:transparent;
+
+    & i{
+      font-size:16px;
+    }
+
+    .secondary &{
+      font-family:$accentFont;
+      font-size:14px;
+      letter-spacing:3px;
+      font-weight:600;
+    }
+
+    &:hover{
+    	background-color:$darkGray;
+    	color:#fff;
+    	border-color:$darkGray;
+  	}
+  }
+
+  &.btn-remove{
+    padding:0;
+    min-height:36px;
+
+    & span{
+      display: inline-block;
+      vertical-align: baseline;
+      padding:5px;
+
+      &:first-child{
+        padding:5px 5px 5px 10px;
+      }
+    }
+
+    & i{
+      position: relative;
+      top:-2px;
+    }
+  }
+
+  &.btn-big {
+    font-size:26px;
+    font-weight:600;
+    line-height:1.1em;
+    letter-spacing:1px;
+
+    & i{
+      font-size:22px;
+      position: relative;
+      top:-2px;
+    }
+  }
+
+  .cart-product-amounts &{
+    border:0;
+    padding:0 15px;
+    display: inline-block;
+    color:$normalGray;
+
+    &:hover{
+      color:$tangerine;
+      background-color:transparent;
+    }
+  }
+
+	.rabbit &,
+	.slider &,
+	.banner-caption & {
+  	border-color:#fff;
+  	color:#fff;
+  	background-color:rgba(0,0,0,0.3);
+
+  	&:hover{
+    	background-color:$tangerine;
+    	color:#fff;
+    	border-color:transparent;
+  	}
+	}
+
+  &.btn-circle{
+  	border:2px solid #fff;
+  	font-size:14px;
+  	line-height:1.8em;
+  	padding:60px 17px;
+  	letter-spacing:2px;
+  	font-weight:600;
+  	border-radius:200px;
+  	font-family:$headingFont;
+  	color:#fff;
+  	background-color:transparent;
+
+  	&:hover{
+  		background-color:$tangerine;
+  		border-color:$tangerine;
+  		color:#fff;
+  	}
+  }
+
+  .scroll-anchor-link &{
+    padding:25px 30px;
+    border:3px solid $darkGray;
+    background:  url('../images/bg-scroll-to-arrow.png') no-repeat center center;
+
+    & i{
+      display: none;
+    }
+
+    &:hover{
+      background:$tangerine url('../images/bg-scroll-to-arrow-white.png') no-repeat center center;
+      border-color:$tangerine;
+    }
+  }
+
+  .toolbar &{
+    padding:10px 25px;
+  }
+
+  .product-callout &{
+    background-color:#fff;
+
+    &:hover{
+      background-color:$tangerine;
+    }
+  }
+
+  #newsletter-popup &{
+    padding-right:45px;
+
+     &:after{
+      content:"";
+      position: absolute;
+      right:15px;
+      top:0;
+      height:100%;
+      width:20px;
+      background:url('../images/bg-orange-arrow.png') no-repeat center center;
+      background-size:9px 24px
+    }
+  }
+
+  @include below-800(){
+
+    &.btn-circle{
+      padding:43px 10px;
+    	font-size:12px;
+    }
+
+    .inline-inputs &{
+      font-size:14px;
+      padding: 5px 10px;
+    }
+  }
+
+  @include below-600(){
+
+    .toolbar &{
+      width:auto;
+    }
+
+    &.btn-checkout{
+      width:100%;
+      display: block;
+    }
+  }
+
+  @include below-480(){
+
+    .rabbit &{
+      font-size:16px
+    }
+
+    &.btn-circle{
+      font-size:11px;
+      padding:40px 7px;
+    }
+  }
+}
+

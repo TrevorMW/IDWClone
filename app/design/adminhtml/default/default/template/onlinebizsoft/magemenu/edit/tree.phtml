@@ -1,0 +1,563 @@
+<?php if ($this->getRoot()): ?>
+<div class="menus-side-col">
+    <?php echo $this->getStoreSwitcherHtml();?>
+    <div class="content-header">
+        <?php echo $this->getAddRootNodeButtonHtml() ?>
+        <?php echo $this->getAddNodeButtonHtml() ?>
+    </div>
+    <div class="tree-actions">
+            <a href="#" onclick="tree.collapseTree(); return false;"><?php echo Mage::helper('magemenu')->__('Collapse All'); ?></a> <span class="separator">|</span> <a href="#" onclick="tree.expandTree(); return false;"><?php echo Mage::helper('magemenu')->__('Expand All'); ?></a>
+    </div>
+    <div class="tree-holder">
+        <div id="tree-div" style="width:100%; overflow:auto;"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var tree;
+
+/**
+ * Fix ext compatibility with prototype 1.6
+ */
+Ext.lib.Event.getTarget = function(e) {
+    var ee = e.browserEvent || e;
+    return ee.target ? Event.element(ee) : null;
+};
+
+Ext.tree.TreePanel.Enhanced = function(el, config)
+{
+    Ext.tree.TreePanel.Enhanced.superclass.constructor.call(this, el, config);
+};
+
+
+Ext.override(Ext.tree.TreeNodeUI, {
+	setIconCls : function(iconCls) {
+		if(this.iconNode){
+			Ext.fly(this.iconNode).replaceClass(this.node.attributes.iconCls, iconCls);
+		}
+		this.node.attributes.iconCls = iconCls;
+	},
+	setIcon : function(icon) {
+		if(this.iconNode){
+			this.iconNode.src = icon || this.emptyIcon;
+			Ext.fly(this.iconNode)[icon ? 'addClass' : 'removeClass']('x-tree-node-inline-icon');
+		}
+		this.node.attributes.icon = icon;
+	}
+});
+
+Ext.extend(Ext.tree.TreePanel.Enhanced, Ext.tree.TreePanel, {
+
+    loadTree : function(config, firstLoad)
+    {
+        var parameters = config['parameters'];
+        var data = config['data'];
+
+        this.storeId = parameters['store_id'];
+
+        if ( this.storeId != 0 && $('add_root_node_button')) {
+            $('add_root_node_button').hide();
+        }
+
+        if ((typeof parameters['root_visible']) != 'undefined') {
+            this.rootVisible = parameters['root_visible']*1;
+        }
+
+        var root = new Ext.tree.TreeNode(parameters);
+
+        this.nodeHash = {};
+        this.setRootNode(root);
+
+        if (firstLoad) {
+            this.addListener('click', this.menuClick);
+            this.addListener('beforenodedrop', menuMove.createDelegate(this));
+        }
+
+        this.loader.buildCategoryTree(root, data);
+        this.el.dom.innerHTML = '';
+        // render the tree
+        this.render();
+        if (parameters['expanded']) {
+            this.expandAll();
+        } else {
+            root.expand();
+        }
+
+        var selectedNode = this.getNodeById(parameters['node_id']);
+        if (selectedNode) {
+            this.currentNodeId = parameters['node_id'];
+        }
+        this.selectCurrentNode();
+    },
+
+    request : function(url, params)
+    {
+        if (!params) {
+            if (menu_info_tabsJsTabs.activeTab) {
+                var params = {active_tab_id:menu_info_tabsJsTabs.activeTab.id};
+            }
+            else {
+                var params = {};
+            }
+        }
+        if (!params.form_key) {
+            params.form_key = FORM_KEY;
+        }
+        var result = new Ajax.Request(
+            url + (url.match(new RegExp('\\?')) ? '&isAjax=true' : '?isAjax=true' ),
+            {
+               parameters:  params,
+               method:      'post'
+            }
+        );
+
+        return result;
+    },
+
+    selectCurrentNode : function()
+    {
+        if (this.currentNodeId) {
+            var selectedNode = this.getNodeById(this.currentNodeId);
+            if ((typeof selectedNode.attributes.path)!='undefined') {
+                var path = selectedNode.attributes.path;
+                if (!this.storeId) {
+                    path = '0/'+path;
+                }
+                this.selectPath(path);
+            } else {
+                this.getSelectionModel().select(selectedNode);
+            }
+        }
+    },
+
+    collapseTree : function()
+    {
+        this.collapseAll();
+
+        this.selectCurrentNode();
+
+        if (!this.collapsed) {
+            this.collapsed = true;
+            this.loader.dataUrl = '<?php echo $this->getLoadTreeUrl(false) ?>';
+            this.request(this.loader.dataUrl, false);
+        }
+    },
+
+    expandTree : function()
+    {
+        this.expandAll();
+        if (this.collapsed) {
+            this.collapsed = false;
+            this.loader.dataUrl = '<?php echo $this->getLoadTreeUrl(true) ?>';
+            this.request(this.loader.dataUrl, false);
+        }
+    },
+
+    menuClick : function(node, e)
+    {
+    	if(typeof parseSidUrl == 'function') {
+	        var baseUrl = '<?php echo $this->getEditUrl() ?>';
+	        var urlExt = (this.storeId?'store/'+this.storeId+'/':'')+'id/'+node.id+'/';
+	        var url = parseSidUrl(baseUrl, urlExt);
+    	} else {
+            var url = '<?php echo $this->getEditUrl() ?>'+(this.storeId?'store/'+this.storeId+'/':'')+'id/'+node.id+'/';
+    	}
+        this.currentNodeId = node.id;
+        this.addNodeTo = false;
+        
+        if (!this.useAjax) {
+            setLocation(url);
+            return;
+        }
+        if (menu_info_tabsJsTabs.activeTab) {
+            var params = {active_tab_id:menu_info_tabsJsTabs.activeTab.id};
+        }
+        updateContent(url, params);
+    }
+});
+
+function updateTree(config)
+{
+	//console.log(config);
+	if (config && tree.addNodeTo) {
+	    var parent = tree.getNodeById(tree.currentNodeId);
+	    tree.addNodeTo = false;
+	
+	    if(parent) {
+	        var node = new Ext.tree.AsyncTreeNode(config[config.length - 1]);
+	        node.loaded = true;                
+	        tree.currentNodeId = node.id;
+	        parent.appendChild(node);
+	        
+	        if (parent.expanded) {
+	            tree.selectCurrentNode();
+	        } else {
+	            var timer;
+	            parent.expand();
+	            var f = function(){
+	                if(parent.expanded){ // done expanding
+	                    clearInterval(timer);
+	                    tree.selectCurrentNode();
+	                }
+	            };
+	            timer = setInterval(f, 200);
+	        }
+	        // tree.selectCurrentNode();
+	    }
+	}
+	
+    // update all affected menus nodes names
+    for (var i = 0; i < config.length; i++) {
+        var node = tree.getNodeById(config[i].id);
+        if (node) {
+            node.setText(config[i].text);
+        }
+    }
+	
+}
+
+function reloadFullTree(id, storeId)
+{	
+	if( ! id) {
+		id = tree.currentNodeId;
+	}
+	
+	var storeParam = 'id/' + id + '/';
+	if(storeId) {
+		storeParam = storeParam + 'id/' + tree.currentNodeId + '/';
+	}
+
+	
+    // retain current selected menu id    
+    var url = tree.switchTreeUrl + storeParam;
+	
+    // load from cache
+    // load from ajax
+    new Ajax.Request(url + (url.match(new RegExp('\\?')) ? '&isAjax=true' : '?isAjax=true' ), {
+        parameters : {store: storeId, form_key: FORM_KEY},
+        method     : 'post',
+        onComplete : function(transport) {
+            var response = eval('(' + transport.responseText + ')');
+            if (!response['parameters']) {
+                return false;
+            }
+
+            _renderNewTree(response, storeParam);
+        }
+    });
+	
+}
+
+function reRenderTree(event, switcher)
+{
+    // re-render tree by store switcher
+    if (tree && event) {
+        var obj = event.target;
+        var newStoreId = obj.value * 1;
+        var storeParam = newStoreId ? 'store/'+newStoreId + '/' : '';
+
+        if (obj.switchParams) {
+            storeParam += obj.switchParams;
+        }
+        if (switcher.useConfirm) {
+            if (!confirm("<?php echo $this->__('Please confirm site switching. All data that hasn\'t been saved will be lost.') ?>")){
+                obj.value = '<?php echo (int) $this->getStoreId() ?>';
+                return false;
+            }
+        }
+
+        if ($('add_root_node_button')) {
+            if (newStoreId == 0) {
+                $('add_root_node_button').show();
+            }
+            else {
+                $('add_root_node_button').hide();
+            }
+        }
+
+        // retain current selected menu id
+        storeParam = storeParam + 'id/' + tree.currentNodeId + '/';
+        var url = tree.switchTreeUrl + storeParam;
+
+        // load from cache
+        // load from ajax
+        new Ajax.Request(url + (url.match(new RegExp('\\?')) ? '&isAjax=true' : '?isAjax=true' ), {
+            parameters : {store: newStoreId, form_key: FORM_KEY},
+            method     : 'post',
+            onComplete : function(transport) {
+                var response = eval('(' + transport.responseText + ')');
+                if (!response['parameters']) {
+                    return false;
+                }
+
+                _renderNewTree(response, storeParam);
+            }
+        });
+    }
+    // render default tree
+    else {
+        _renderNewTree();
+    }
+}
+
+function _renderNewTree(config, storeParam)
+{
+    if (!config) {
+        var config = defaultLoadTreeParams;
+    }
+    if (tree) {
+        tree.purgeListeners();
+        tree.el.dom.innerHTML = '';
+    }
+    tree = new Ext.tree.TreePanel.Enhanced('tree-div', newTreeParams);
+    tree.loadTree(config, true);
+
+    // try to select current menu
+    var selectedNode = tree.getNodeById(config.parameters.node_id);
+    if (selectedNode) {
+        tree.currentNodeId = config.parameters.node_id;
+    }
+    tree.selectCurrentNode();
+
+    // update content area
+    var url = tree.editUrl;
+    if (storeParam) {
+        url = url + storeParam;
+    }
+    <?php if ($this->isClearEdit()):?>
+    if (selectedNode) {
+        url = url + 'id/' + config.parameters.node_id;
+    }
+    <?php endif;?>
+    updateContent(url);
+}
+
+Ext.onReady(function()
+{
+    menuLoader = new Ext.tree.TreeLoader({
+       dataUrl: '<?php echo $this->getLoadTreeUrl() ?>'
+    });
+
+    menuLoader.createNode = function(config) {
+        var node;
+        var _node = Object.clone(config);
+        if (config.children && !config.children.length) {
+            delete(config.children);
+            node = new Ext.tree.AsyncTreeNode(config);
+        } else {
+            node = new Ext.tree.TreeNode(config);
+        }
+
+        return node;
+    };
+
+    menuLoader.buildCategoryTree = function(parent, config)
+    {
+        if (!config) return null;
+
+        if (parent && config && config.length){
+            for (var i = 0; i < config.length; i++) {
+                var node;
+                var _node = Object.clone(config[i]);
+                if (_node.children && !_node.children.length) {
+                    delete(_node.children);
+                    node = new Ext.tree.AsyncTreeNode(_node);
+                } else {
+                    node = new Ext.tree.TreeNode(config[i]);
+                }
+                parent.appendChild(node);
+                node.loader = node.getOwnerTree().loader;
+                if (_node.children) {
+                    this.buildCategoryTree(node, _node.children);
+                }
+            }
+        }
+    };
+
+    menuLoader.buildHash = function(node)
+    {
+        var hash = {};
+
+        hash = this.toArray(node.attributes);
+
+        if (node.childNodes.length>0 || (node.loaded==false && node.loading==false)) {
+            hash['children'] = new Array;
+
+            for (var i = 0, len = node.childNodes.length; i < len; i++) {
+                if (!hash['children']) {
+                    hash['children'] = new Array;
+                }
+                hash['children'].push(this.buildHash(node.childNodes[i]));
+            }
+        }
+
+        return hash;
+    };
+
+    menuLoader.toArray = function(attributes) {
+        var data = {form_key: FORM_KEY};
+        for (var key in attributes) {
+            var value = attributes[key];
+            data[key] = value;
+        }
+
+        return data;
+    };
+
+    menuLoader.on("beforeload", function(treeLoader, node) {
+        treeLoader.baseParams.id = node.attributes.id;
+        treeLoader.baseParams.store = node.attributes.store;
+        treeLoader.baseParams.form_key = FORM_KEY;
+    });
+
+    menuLoader.on("load", function(treeLoader, node, config) {
+        varienWindowOnload();
+    });
+
+    if ((typeof varienStoreSwitcher)!='undefined') {
+        varienStoreSwitcher.storeSelectorClickCallback = reRenderTree;
+    }
+
+    newTreeParams = {
+        animate         : false,
+        loader          : menuLoader,
+        enableDD        : true,
+        containerScroll : true,
+        selModel        : new Ext.tree.CheckNodeMultiSelectionModel(),
+        rootVisible     : '<?php echo $this->getRoot()->getIsVisible() ?>',
+        useAjax         : <?php echo $this->getUseAjax() ?>,
+        switchTreeUrl   : '<?php echo $this->getSwitchTreeUrl() ?>',
+        editUrl         : '<?php echo $this->getEditUrl() ?>',
+        currentNodeId   : <?php echo (int) $this->getMenuId() ?>,
+        addNodeTo       : false
+    };
+
+    defaultLoadTreeParams = {
+        parameters : {
+            text        : '<?php echo htmlentities($this->getRoot()->getName()) ?>',
+            draggable   : false,
+            allowDrop   : <?php if ($this->getRoot()->getIsVisible()): ?>true<?php else : ?>false<?php endif; ?>,
+            id          : <?php echo (int) $this->getRoot()->getId() ?>,
+            expanded    : <?php echo (int) $this->getIsWasExpanded() ?>,
+            store_id    : <?php echo (int) $this->getStore()->getId() ?>,
+            node_id : <?php echo (int) $this->getMenuId() ?>
+        },
+        data : <?php echo $this->getTreeJson() ?>
+    };
+
+    reRenderTree();
+});
+
+function addNew(url, isRoot)
+{
+    if (isRoot) {
+        tree.currentNodeId = <?php echo OnlineBiz_MageMenu_Model_Menuitem::TREE_ROOT_ID ?>;
+        url += 'root/1/';
+    }
+    tree.addNodeTo = tree.currentNodeId;
+
+    if (/store\/\d+/.test(url)) {
+        url = url.replace(/store\/\d+/, "store/" + tree.storeId);
+    }
+    else    {
+        url+= "store/" + tree.storeId + "/";
+    }
+	url = url.replace('?isAjax=true', '');
+    url+= 'parent/'+tree.currentNodeId;    
+    updateContent(url);
+}
+
+function menuMove(obj)
+{
+    var data = {id: obj.dropNode.id, form_key: FORM_KEY};
+
+    data.point = obj.point;
+    switch (obj.point) {
+        case 'above' :
+            data.pid = obj.target.parentNode.id;
+            data.paid = obj.dropNode.parentNode.id;
+            if (obj.target.previousSibling) {
+                data.aid = obj.target.previousSibling.id;
+            } else {
+                data.aid = 0;
+            }
+            break;
+        case 'below' :
+            data.pid = obj.target.parentNode.id;
+            data.aid = obj.target.id;
+        break;
+        case 'append' :
+            data.pid = obj.target.id;
+            data.paid = obj.dropNode.parentNode.id;
+            if (obj.target.lastChild) {
+                data.aid = obj.target.lastChild.id;
+            } else {
+                data.aid = 0;
+            }
+        break;
+        default :
+            obj.cancel = true;
+            return obj;
+    }
+
+    var success = function(o) {
+    	// @changed
+        //try {
+        //    if(o.responseText && o.responseText!=='SUCCESS'){
+        //        alert(o.responseText);
+        //        location.reload();
+        //    }
+        //}
+        //catch(e) {
+        //}
+        // @to
+        try {
+            if(o.responseText){
+                if(o.responseText==='SUCCESS'){
+                	menuForm.refreshPath();
+                } else {
+                    alert(o.responseText);
+                    location.reload();
+                }
+            }
+        }
+        catch(e) {
+
+        }
+
+        // @end
+    };
+    var failure = function(o) {
+        try {
+            console.log(o.statusText);
+        } catch (e2) {
+            alert(o.statusText);
+        }
+        location.reload();
+    };
+
+    var pd = [];
+    for(var key in data) {
+        pd.push(encodeURIComponent(key), "=", encodeURIComponent(data[key]), "&");
+    }
+    pd.splice(pd.length-1,1);
+    new Ajax.Request(
+        '<?php echo $this->getMoveUrl() ?>',
+        {
+            method:     'POST',
+            parameters: pd.join(""),
+            onSuccess : success,
+            onFailure : failure
+        }
+    );
+}
+
+
+//]]>
+</script>
+<?php else: ?>
+<div class="menus-side-col">
+    <?php echo $this->getStoreSwitcherHtml();?>
+</div>
+<?php endif; ?>

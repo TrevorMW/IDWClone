@@ -1,0 +1,121 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+$route = '';
+
+$route = $this->getRequest()->getModuleName().'_'.$this->getRequest()->getControllerName().'_'.$this->getRequest()->getActionName(); ?>
+
+<meta http-equiv="Content-Type" content="<?php echo $this->getContentType() ?>" />
+<title><?php echo $this->getTitle() ?></title>
+<meta name="description" content="<?php echo htmlspecialchars($this->getDescription()) ?>" />
+<meta name="keywords"    content="<?php echo htmlspecialchars($this->getKeywords()) ?>" />
+<meta name="robots"      content="<?php echo htmlspecialchars($this->getRobots()) ?>" />
+<meta name="viewport"    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+<link rel="icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<link rel="shortcut icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<!--[if lt IE 7]>
+<script type="text/javascript">
+//<![CDATA[
+    var BLANK_URL = '<?php echo $this->helper('core/js')->getJsUrl('blank.html') ?>';
+    var BLANK_IMG = '<?php echo $this->helper('core/js')->getJsUrl('spacer.gif') ?>';
+//]]>
+</script>
+<![endif]-->
+<?php echo $this->getCssJsHtml() ?>
+<?php echo $this->getChildHtml() ?>
+<?php echo $this->helper('core/js')->getTranslatorScript() ?>
+<?php echo $this->getIncludes() ?>
+
+<link rel="alternate" href="http://www.industrywest.com/" hreflang="en-us" />
+<link rel="alternate" href="http://www.industrywest.com/" hreflang="en" />
+<link rel="alternate" href="http://www.industrywest.ca/" hreflang="en-ca" />
+
+<script type="text/javascript" async defer src="//assets.pinterest.com/js/pinit.js"></script>
+<script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
+
+
+<?php /* if( $route == 'checkout_onepage_success' ) : ?>
+<!-- START FACEBOOK CONVERSIONS -->
+<script type="text/javascript">
+  (function()
+  {
+    var _fbq = window._fbq || (window._fbq = []);
+
+    if (!_fbq.loaded)
+    {
+      var fbds = document.createElement('script');
+      fbds.async = true;
+      fbds.src = '//connect.facebook.net/en_US/fbds.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(fbds, s);
+      _fbq.loaded = true;
+    }
+  })();
+  window._fbq = window._fbq || [];
+  window._fbq.push(['track', '6033887754057', {'value':'0.00','currency':'USD'}]);
+
+</script>
+<!-- END FACEBOOK CONVERSIONS  -->
+<?php endif; */ ?>
+
+
+<script src="//use.typekit.net/scg7rlp.js"></script>
+<script>try{Typekit.load();}catch(e){}</script>
+
+<!-- start Mixpanel -->
+<script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("44ea99c00a0f6104ff9398720aff9729");</script>
+
+<!-- <meta name="msvalidate.01" content="7BBF5722D88395C1F64171B2FA41ABBE" /> -->
+
+<script>(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"4077150"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script><noscript><img src="//bat.bing.com/action/0?ti=4077150&Ver=2" height="0" width="0" style="display:none; visibility: hidden;" /></noscript>
+
+<script type="text/javascript">
+(function(a,e,c,f,g,b,d)
+{
+  var h = {ak:"947771178", cl:"PkMPCLeam1wQqq73wwM"};
+  a[c] = a[c]||function()
+  {
+    (a[c].q=a[c].q||[]).push(arguments)
+  };
+  a[f]||(a[f] = h.ak);
+  b = e.createElement(g);
+  b.async = 1;
+  b.src = "//www.gstatic.com/wcm/loader.js";
+  d = e.getElementsByTagName(g)[0];
+  d.parentNode.insertBefore(b,d);
+  a._googWcmGet = function(b,d,e)
+  {
+    a[c](2,b,h,d,null,new Date,e)
+  }
+})(window,document,"_googWcmImpl","_googWcmAk","script");
+
+</script>
+
+
+
+

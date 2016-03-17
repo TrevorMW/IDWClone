@@ -1,0 +1,165 @@
+<?php
+$time_start = microtime(true); 
+$_product = $this->getProduct();
+if (!$_product->isConfigurable())
+    return false;
+
+$_configurable_attribute = Mage::getStoreConfig("attributeswatches/productlist/attributes");
+$_availability_attribute = Mage::getStoreConfig("attributeswatches/productlist/availability");
+
+/*$_show_availability = false;
+if ($_availability_attribute) {
+    $_show_availability = Mage::getResourceModel('attributeswatches/attributes')->hasConfigurableAttributeForList($_product->getId(), $_availability_attribute);
+}
+
+if (count($_show_availability)) {
+    $_availability_configuration = array();
+    foreach ($_product->getTypeInstance(true)->getConfigurableAttributes($_product) as $attribute) {
+        $_att_code = $attribute->getProductAttribute()->getAttributeCode();
+        if ($_att_code == $_availability_attribute) {
+            $_availability_configuration["values"] = $attribute->getPrices() ? $attribute->getPrices() : array();
+            //$_availability_configuration["label"] =$attribute->getProductAttribute()->getFrontend()->getLabel();
+            }
+    }
+
+    if (count($_availability_configuration)) {
+        ?>
+        <!--span class="attribute-availability-label"><?php //echo $_availability_configuration["label"]; ?></span-->
+        <ul class="attribute-availability">
+            <?php foreach ($_availability_configuration["values"] as $_value) { ?>  
+                <?php //print_r($_value);  ?>    
+                <li><?php echo $_value["store_label"]; ?></li>
+            <?php } ?>
+        </ul>
+        <?php
+    }*/
+
+$_availability_configuration = Mage::getResourceModel('attributeswatches/attributes')->hasConfigurableAttributeSimple($_availability_attribute, $_product->getId());
+
+//print_r($_availability_configuration);
+
+if (count($_availability_configuration)) {
+        ?>
+        <!--span class="attribute-availability-label"><?php //echo $_availability_configuration["label"]; ?></span-->
+        <ul class="attribute-availability">
+            <?php foreach ($_availability_configuration as $_i) { ?>  
+                <?php //print_r($_value);  ?>    
+                <li><?php echo $_i["label"]; ?></li>
+            <?php } ?>
+        </ul>
+        <?php
+    }
+
+
+$time_end = microtime(true);
+
+//dividing with 60 will give the execution time in minutes other wise seconds
+$execution_time = ($time_end - $time_start);
+
+//execution time of the script
+echo '<span style="display:none">'.$execution_time.' s.</span>';    
+    
+//}
+
+$_swatches = Mage::getResourceModel('attributeswatches/attributes')->hasConfigurableAttribute($_configurable_attribute, $_product->getId());
+
+$time_end = microtime(true);
+
+//dividing with 60 will give the execution time in minutes other wise seconds
+$execution_time = ($time_end - $time_start);
+
+//execution time of the script
+echo '<span style="display:none">'.$execution_time.' s.</span>';   
+
+if ($_swatches) {
+    $_swatches_mode = Mage::getStoreConfig("attributeswatches/productlist/mode");
+    $_image_source = Mage::getStoreConfig("attributeswatches/productlist/images");
+    $_gallery_images = array();
+    /* to get the attribute id */
+    $_attribute_id = 0;
+    foreach ($_swatches as $_p => $_data) {
+        $_attribute_id = $_data["attribute_id"];
+        break;
+    }
+    if ($_image_source == "gallery") {
+        $time_end = microtime(true);
+
+//dividing with 60 will give the execution time in minutes other wise seconds
+$execution_time = ($time_end - $time_start);
+
+//execution time of the script
+echo '<span style="display:none">'.$execution_time.' s.</span>';
+        $_gallery = $_product->load()->getSwatchesGalleryImages($_attribute_id);
+        $time_end = microtime(true);
+
+//dividing with 60 will give the execution time in minutes other wise seconds
+$execution_time = ($time_end - $time_start);
+
+//execution time of the script
+echo '<span style="display:none">after loading gallery '.$execution_time.' s.</span>';
+        foreach ($_gallery as $_image) {
+            $_gallery_images[$_image->getAttributeValue()] = $_image->getFile();
+        }
+    }
+    
+    /* loading products to be used for swatches */
+    
+    
+    ?>
+    <ul class="attribute-swatches product-list">
+        <?php
+        $counter = 0;
+        foreach ($_swatches as $product_id => $_option) {
+            //$product = Mage::getModel('catalog/product')->load($product_id);
+            //if (in_array($product->getStoreId(), $product->getStoreIds())) {
+                $counter++;
+                $_swatch = "";
+                $_thumbnail = "";
+                if ($_swatches_mode == "swatches") {
+                    if ($_option["mode"] == 2) {
+                        $_swatch = "background-color:#" . $_option["color"];
+                    } elseif ($_option["mode"] == 1) {
+                        $_swatch = "background-image:url('" . Mage::getBaseUrl('media') . 'attributeswatches/' . $_option["filename"] . "');";
+                    }
+                } elseif ($_swatches_mode == "image") {
+                    if ($_image_source == "child") {
+                        $product = Mage::getModel('catalog/product')->load($product_id);
+                        $_swatch = "background-image:url('" . $this->helper('catalog/image')->init($product, 'image')->resize(25) . "');";
+                    } elseif ($_image_source == "gallery") {
+                        if ($_gallery_images[$_option["value"]]) {
+                            $_swatch = "background-image:url('" . $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_gallery_images[$_option["value"]])->resize(25) . "');";
+                        }
+                    }
+                }
+                if ($_image_source == "child") {
+                    $product = Mage::getModel('catalog/product')->load($product_id);
+                    $_thumbnail = $this->helper('catalog/image')->init($product, 'image')->resize(135);
+                } elseif ($_image_source == "gallery") {
+                    if ($_gallery_images[$_option["value"]]) {
+                        $_thumbnail = $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_gallery_images[$_option["value"]])->resize(135);
+                    }
+                }
+                ?>
+                <li class='attribute-swatch-<?php echo $counter; ?>'>
+                    <a href="<?php echo $_product->getProductUrl(); ?>" rel="<?php echo $_thumbnail; ?>" style="<?php echo $_swatch; ?>">
+                        &nbsp;
+                    </a>
+                    <span class="tooltip-container"><span class="tooltip"><span><?php echo $_option["label"]; ?> </span></span></span>
+                </li>
+                <?php
+            //}
+        }
+        ?>
+    </ul>
+    <?php
+}
+
+$time_end = microtime(true);
+
+//dividing with 60 will give the execution time in minutes other wise seconds
+$execution_time = ($time_end - $time_start);
+
+//execution time of the script
+echo '<span style="display:none">'.$execution_time.' s.</span>';
+
+?>

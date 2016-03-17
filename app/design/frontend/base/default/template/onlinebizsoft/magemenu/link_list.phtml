@@ -1,0 +1,20 @@
+<?php
+/**
+ * magemenu/menuitem/link_list.phtml
+ *
+ * @package OnlineBiz_MageMenu
+
+ * @version 1.5.0
+ *
+ */
+?>
+
+<?php 
+$this->getBlock()->addElementOptions('class', 'div', array('magemenu-menu', 'nav-link-list'));
+?>
+<div<?php echo $this->getBlock()->getElementOptions('div') ?>>
+    <h4 class="no-display"><?php echo $this->getName() ?></h4>
+	<ul class="nav-link-list">
+		<?php echo implode(' | ', $this->getMenu(true)) ?>
+    </ul>	
+</div>

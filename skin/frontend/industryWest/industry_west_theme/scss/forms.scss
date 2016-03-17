@@ -1,0 +1,566 @@
+/** INDUSTRY WEST SCSS THEME
+ *
+ * Site By:
+ *
+ * Version: 1.0.0
+ *
+ */
+
+
+@import 'variables';
+
+input[type="text"],
+input[type="search"],
+input[type="password"],
+input[type="number"],
+input[type="email"],
+input[type="tel"],
+input[type="fax"],
+textarea{
+	font-size:14px;
+	font-weight:500;
+	font-family:$baseFont;
+	letter-spacing:0;
+	text-transform:none;
+	background-color: $lightGray;
+	padding:15px 15px;
+	border:0;
+	border-bottom:2px solid transparent;
+	border-radius:0 !important;
+	-webkit-border-radius:0 !important;
+	-webkit-appearance: none;
+
+	&.no-display{
+  	display: none;
+	}
+
+	@include placeholders( $darkGray );
+
+	&:focus{
+		border-bottom:2px solid $tangerine;
+	}
+
+	&.validation-failed{
+		background-color:pink;
+
+		&:focus{
+			border-color:darkred;
+		}
+	}
+
+  .cart-shipping-quotes &,
+	&.white{
+  	background-color:#fff;
+	}
+
+	.dob &{
+  	display: inline-block;
+  	width:25%;
+  	margin-left:15px;
+	}
+
+	.zip &{
+    width:auto;
+	}
+
+	.tertiary &,
+	.checkout-widget &{
+		background-color:#fff;
+	}
+
+	.data-table &{
+		padding:14px 15px;
+	}
+
+	.inline-input-field &{
+    margin-bottom:0;
+	}
+
+	#newsletter-popup &{
+  	padding:25px 15px;
+  	font-size:12px;
+  	background-color:#cecdcd;
+  	color:#828181 !important;
+	}
+}
+
+.dob input[type="text"]:first-of-type{
+  margin-left:0;
+}
+
+textarea{
+  padding:23px 15px;
+}
+
+input[type="search"]{
+
+  .utility &:focus,
+  main &:focus{
+    border:0;
+  }
+
+  .utility &{
+    margin:0;
+  }
+}
+
+input[type="password"]{
+	-webkit-text-security: disc;
+}
+
+input.qty{
+  min-width:50px;
+}
+
+select{
+	font-size:12px;
+	font-weight:600;
+	letter-spacing:2px;
+	font-family:$headingFont;
+	text-transform:uppercase;
+	background: $lightGray url('../images/plus.png') no-repeat right 15px center;
+  background-size:8px 8px;
+	height:49px;
+	border:0;
+	border-radius:0 ;
+	text-indent:15px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	cursor:pointer;
+	text-overflow: '';
+	padding-right:35px;
+
+	@include firefox-only(){
+  	text-indent:5px;
+	}
+
+	&:focus{
+		background-color:#eaeaea;
+	}
+
+	.small &{
+  	width:45%;
+  	display: inline-block;
+    margin-left:15px;
+
+    &:first-child{
+    	margin-left:0;
+  	}
+	}
+
+  .cart-shipping-quotes &,
+  aside &,
+	&.white{
+  	background-color:#fff;
+	}
+
+	.pager &{
+  	width:85px;
+  	height:35px;
+  	display:inline-block;
+	}
+
+	&.validation-failed{
+		background-color:pink;
+	}
+
+	.toolbar &{
+		height:38px;
+		min-width:125px;
+		vertical-align: middle;
+	}
+}
+
+select option{
+	text-transform:capitalize !important;
+}
+
+form{
+
+	& fieldset{
+		margin:30px 0 40px 0;
+
+		&.form-submit{
+			display: block;
+			width: 100%;
+			text-align: right;
+		}
+	}
+
+	& legend{
+		padding:0;
+	}
+
+	& ul,
+	& ol{
+		display: block;
+		width:100%;
+
+		&:after{
+  		@include clearfix();
+		}
+	}
+
+	& li{
+		float:left;
+		width:100%;
+		padding:10px 15px 10px 0;
+
+		&.half{
+			width:49%;
+		}
+
+		&.third{
+			width:33.333%;
+		}
+
+		&.fourth{
+			width:25%;
+		}
+
+		&.two-third{
+			width:66.667%;
+		}
+
+		&.three-fourth{
+			width:75%;
+		}
+
+		&.right{
+			float:right;
+			padding-right:0;
+		}
+
+		&.clear{
+			clear:both;
+		}
+
+		&.full{
+			padding:10px 0;
+			width:100%;
+		}
+
+		&.no-display{
+  		padding:0;
+  		display:none;
+
+		}
+
+    @include below-1024(){
+      display:inline-block;
+  		vertical-align:top;
+  		float:none;
+
+
+
+  		&.third{
+    		width:49%;
+  		}
+
+  		&.two-third{
+    		width:49%;
+
+  		  &.right{
+    		  width:100%;
+    		  clear:both;
+  		  }
+  		}
+
+  		&.fourth{
+    		width:49%;
+  		}
+
+  		&.three-fourth{
+    		width:100%
+  		}
+
+  		&.clear{
+    		clear:none;
+  		}
+    }
+
+    @include below-600(){
+      padding:15px 0;
+
+      &.half,
+      &.fourth,
+      &.third,
+      &.three-fourth,
+      &.two-third{
+         width:100%;
+
+      }
+
+  		&.right{
+    		padding-right:0;
+    		float:none;
+  		}
+
+  		&.clear{
+    		clear:both;
+  		}
+    }
+	}
+
+	& input,
+	& select,
+	& textarea{
+		display: block;
+		width:100%;
+		margin-bottom:5px;
+	}
+
+	&.search-form input{
+		background-color: $lightGray;
+		padding:11px 15px;
+		border:0;
+		font-family: $headingFont;
+		font-size:12px;
+  	font-weight:700;
+  	color:$darkGray;
+  	letter-spacing:2px;
+  	text-transform: uppercase;
+	}
+
+	aside & li{
+		display: block;
+		float:none;
+	}
+
+	[data-popup] &{
+  	display: none;
+  	@include transition(opacity .3s);
+
+  	&.active-form{
+    	opacity:1;
+    	display: block;
+  	}
+
+  	li{
+    	padding:8px 0 0 0 ;
+  	}
+
+  	li.submit{
+    	text-align: right;
+    	padding-right:0;
+
+    	& button{
+      	margin-top:15px;
+    	}
+  	}
+	}
+}
+
+
+.inline-inputs{
+	display: table;
+	width:100%;
+	table-layout: auto;
+
+	& .inline-input-field,
+	& .btn{
+		display: table-cell;
+		width:auto;
+		vertical-align: bottom;
+		margin:0;
+	}
+
+	& .btn{
+  	height:49px;
+	}
+
+	& .inline-input-field{
+  	padding-right:15px;
+	}
+
+	& i{
+		position: relative;
+		top:-3px;
+		font-size:15px;
+	}
+
+}
+
+.checkbox{
+  padding:4px 0;
+
+	& input,
+	& label{
+		display: inline-block;
+		vertical-align:middle;
+		width:auto;
+		margin:0;
+	}
+
+	& label{
+		padding-left:12px;
+	}
+
+	.shipping-methods &{
+  	padding:10px 8px 8px 8px;
+  	margin-bottom:5px;
+	}
+
+	& .payment-method-container label{
+  	padding:5px 0;
+	}
+
+	@include below-600(){
+
+    & input,
+    & label{
+      vertical-align:middle;
+    }
+
+    & label{
+      max-width:90%;
+    }
+	}
+}
+
+form li.checkbox{
+    margin: 0;
+    padding: 0 0 5px 0;
+	}
+
+.add-to-cart input.qty{
+	background-color:#fff;
+	max-width:80px;
+	display:block;
+	margin: 15px 0;
+	text-align:center;
+	min-width:80px;
+}
+
+.cart-product-amounts .qty{
+  text-align: center;
+}
+
+.search-form{
+	position: relative;
+	margin:0;
+
+	& input{
+  	width:100%;
+	}
+
+	.header &{
+
+		& input{
+			padding:10px;
+			font-size:12px;
+			font-weight:600;
+		}
+	}
+
+	& i{
+  	position: relative;
+  	top:-1px;
+  	left:-1px;
+	}
+
+	.catalog-category-view &{
+
+    & input{
+			margin:0;
+		}
+	}
+
+	.category-shop &, .category-collections & {
+  	float:right;
+
+		& input{
+			width:100%;
+			min-width:250px;
+			margin:0;
+			height:39px;
+		}
+	}
+
+	.toolbar &{
+  	margin-top:0;
+	}
+
+	@include below-1024(){
+
+  	.catalog-category-view &{
+  		display: block;
+      width:100%;
+      float:none;
+
+      & input{
+  			width:100%;
+  		}
+    }
+
+  }
+
+  @include below-600(){
+
+  	.toolbar &{
+      border-top:2px solid $lightGray;
+
+  	}
+
+    .mobile-active & input{
+      width:100%;
+      padding:15px;
+    }
+  }
+}
+
+.validation-advice{
+  display:inline-block;
+  width:auto;
+  clear:both;
+	color:darkred;
+	font-weight:500;
+	padding-top:5px;
+
+	.inline-input-field &{
+    padding-top:10px;
+	}
+
+	.small &{
+  	display: none;
+	}
+}
+
+[data-newsletter-signup]{
+
+  & ul{
+    width:100%;
+  }
+
+  & li{
+    float:none;
+    padding:0;
+    width:100%;
+    display: block;
+    text-align: center !important;
+  }
+
+
+  & [data-loader]{
+    display: inline;
+
+    & i{
+      color:#fff;
+      font-size:20px;
+    }
+  }
+}
+
+[data-signup-error] {
+  font-size:16px;
+  line-height:26px;
+
+  &.error{
+    color:red;
+  }
+
+  &.success{
+    color:green;
+  }
+}
+

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+<modules>
+    <Mod_Zero1>
+        <active>true</active>
+        <codePool>local</codePool>
+        <depends>
+            <Zero1_Seoredirects/>
+        </depends>
+    </Mod_Zero1>
+</modules>
+</config>

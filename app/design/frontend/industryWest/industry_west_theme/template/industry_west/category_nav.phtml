@@ -1,0 +1,65 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ *
+ * Category layered navigation
+ *
+ * @see Mage_Catalog_Block_Layer_View
+ */
+
+$html = $class = '';
+
+$catalog_menu = $this->getLayout()->createBlock('magemenu/menuitem')->setMenuCode('catalog_categories');
+
+$html .= '<nav class="container catalog-categories" data-mobile-dropdown-parent="true"><a href="#" data-mobile-dropdown="true" class="">Categories</a><ul data-mobile-toggle-panel="true">';
+
+if( is_object( $catalog_menu ) )
+{
+  $html .= $catalog_menu->toHtml();
+}
+else
+{
+  $currentCat = $this->getCurrentCategory();
+  $current_url = $currentCat->getUrl();
+  $all_cats = Mage::getModel('catalog/category')->getCollection()->addAttributeToSelect('*')->addFieldToFilter('parent_id', 3 )->addAttributeToSort('position', ASC);
+  $cat_count = count($all_cats);
+
+  if( $all_cats > 0 ) :
+    foreach( $all_cats as $k => $link ):
+
+      $current_url == $link->getUrl() ? $class = 'active' : $class = '' ;
+
+      $html .= '<li class="'.$class.'"><a href="'.$link->getUrl().'">'.$link->getName().'</a></li>';
+
+    endforeach;
+  endif;
+}
+
+$html .= '</ul></nav>';
+
+echo $html;
+
+
+
+

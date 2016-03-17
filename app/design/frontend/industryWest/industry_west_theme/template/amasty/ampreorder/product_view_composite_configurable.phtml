@@ -1,0 +1,21 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2015 Amasty (https://www.amasty.com)
+ * @package Amasty_Preorder
+ */
+?>
+
+<script type="text/javascript">
+    //<![CDATA[
+    var preorderState = new PreorderStateConfigurable();
+    preorderState.cartLabel = '<?php echo addslashes($this->getPreorderCartLabel()) ?>';
+    preorderState.preorderMap = <?php echo json_encode($this->getConfigurablePreorderMap()) ?>;
+    preorderState.messageMap = <?php echo json_encode($this->getConfigurableMessageMap()) ?>;
+    preorderState.cartLabelMap = <?php echo json_encode($this->getConfigurableCartLabelMap()) ?>;
+
+    Event.observe(window, 'load', function () {
+        preorderState.start();
+    });
+    //]]>
+</script>

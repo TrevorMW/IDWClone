@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <OnlineBiz_MageMenu>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Admin />
+                <Mage_Adminhtml />
+                <Mage_Catalog />
+            </depends>
+        </OnlineBiz_MageMenu>
+    </modules>
+</config>

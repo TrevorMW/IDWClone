@@ -1,0 +1,50 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2015 Amasty (https://www.amasty.com)
+ * @package Amasty_Preorder
+ */
+
+/** @var Amasty_Preorder_Block_Adminhtml_Product_Preorder $this */
+?>
+
+<tr>
+    <td class="label"><label for="inventory_preorder_note"><?php echo $this->__('Pre-Order Note') ?></label></td>
+    <td class="value"><input type="text" class="input-text" id="inventory_preorder_note" name="product[preorder_note]" value="<?php echo $this->escapeHtml($this->getNote()) ?>" /></td>
+    <td class="value scope-label"><?php echo Mage::helper('adminhtml')->__('[STORE VIEW]') ?></td>
+</tr>
+<tr>
+    <td class="label"><label for="inventory_preorder_cart"><?php echo $this->__('Pre-Order Cart Button') ?></label></td>
+    <td class="value">
+        <input type="text" class="input-text" id="inventory_preorder_cart_label" name="product[preorder_cart_label]" value="<?php echo $this->escapeHtml($this->getCartLabel()) ?>" />
+        <br />
+        <label><?php echo Mage::helper('adminhtml')->__('Leave empty to use global setting') ?></label>
+    </td>
+    <td class="value scope-label"><?php echo Mage::helper('adminhtml')->__('[STORE VIEW]') ?></td>
+</tr>
+
+<script type="text/javascript">
+    //<![CDATA[
+    function togglePreorderNoteVisibility() {
+        var backordersValue = $('inventory_use_config_backorders').checked
+            ? <?php echo $this->getDefaultBackordersValue() ?>
+            : parseInt($('inventory_backorders').value);
+        var preorderNoteRow = $('inventory_preorder_note').up('tr');
+        var preorderCartLabelRow = $('inventory_preorder_cart_label').up('tr');
+        if (backordersValue === <?php echo Amasty_Preorder_Model_Rewrite_CatalogInventory_Source_Backorders::BACKORDERS_PREORDER ?>) {
+            preorderNoteRow.show();
+            preorderCartLabelRow.show();
+        } else {
+            preorderNoteRow.hide();
+            preorderCartLabelRow.hide();
+        }
+    }
+
+    Event.observe(window, 'load', function() {
+        Event.observe($('inventory_backorders'), 'change', togglePreorderNoteVisibility);
+        Event.observe($('inventory_use_config_backorders'), 'change', togglePreorderNoteVisibility);
+        togglePreorderNoteVisibility();
+    });
+
+    //]]>
+</script>

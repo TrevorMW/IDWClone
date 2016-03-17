@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+        <reference name="top.menu">
+			<action method="unsetChild" ifconfig="magemenu/general/hide_default_navigation">
+				<name>catalog.topnav</name>
+			</action>
+        </reference>        
+        <reference name="footer">
+			<action method="unsetChild" ifconfig="magemenu/general/hide_footer_links">
+				<name>footer_links</name>
+			</action>
+        </reference>
+        
+        
+        <reference name="head">
+            <action method="addCss"><stylesheet>onlinebizsoft/magemenu/css/magemenu.css</stylesheet></action>
+            <action method="addCss" ifconfig="magemenu/general/use_responsive"><stylesheet>onlinebizsoft/magemenu/css/navresponsive.css</stylesheet></action>
+            <action method="addJs"><script>onlinebizsoft/magemenu/magemenu.js</script></action>
+            <action method="addJs"><script>onlinebizsoft/magemenu/treenavi.js</script></action>
+			<action method="addJs"><script>onlinebizsoft/magemenu/explodedmenu.js</script></action>
+            <action method="addJs" ifconfig="magemenu/general/include_jquery"><script>onlinebizsoft/bootstrap/jquery.js</script></action>
+            <action method="addJs" ifconfig="magemenu/general/include_bootstrap_js"><script>onlinebizsoft/bootstrap/bootstrap.min.js</script></action>
+			<action method="addJs" ifconfig="magemenu/general/use_responsive"><script>onlinebizsoft/magemenu/responsive.js</script></action>
+
+        </reference>
+                
+		<reference name="top.menu">
+			<block type="magemenu/menuitem_list" name="magemenu.menu.top" before="-">
+				<action method="setBlockId">
+					<block_id>menu-top</block_id>
+				</action>
+			</block>
+			<block type="magemenu/menuitem_list" name="magemenu.menu.bottom">
+				<action method="setBlockId">
+					<block_id>menu-bottom</block_id>
+				</action>
+			</block>
+		</reference>
+		<reference name="content">
+			<block type="magemenu/menuitem_list" name="magemenu.content.top" before="-">
+				<action method="setBlockId">
+					<block_id>content-top</block_id>
+				</action>
+			</block>
+		</reference>
+		<reference name="right">
+			<block type="magemenu/menuitem_list" name="magemenu.sidebar.right.top"
+				before="-">
+				<action method="setBlockId">
+					<block_id>sidebar-right-top</block_id>
+				</action>
+			</block>
+			<block type="magemenu/menuitem_list" name="magemenu.sidebar.right.bottom">
+				<action method="setBlockId">
+					<block_id>sidebar-right-bottom</block_id>
+				</action>
+			</block>
+		</reference>
+		<reference name="left">
+			<block type="magemenu/menuitem_list" name="magemenu.sidebar.left.top" before="-">
+				<action method="setBlockId">
+					<block_id>sidebar-left-top</block_id>
+				</action>
+			</block>
+			<block type="magemenu/menuitem_list" name="magemenu.sidebar.left.bottom">
+				<action method="setBlockId">
+					<block_id>sidebar-left-bottom</block_id>
+				</action>
+			</block>
+		</reference>
+		<reference name="footer">
+			<block type="magemenu/menuitem_list" name="magemenu.footer.top" before="-">
+				<action method="setBlockId">
+					<block_id>footer-top</block_id>
+				</action>
+			</block>
+			<block type="magemenu/menuitem_list" name="magemenu.footer.bottom">
+				<action method="setBlockId">
+					<block_id>footer-bottom</block_id>
+				</action>
+			</block>
+		</reference>
+		<reference name="before_body_end">
+			<block type="magemenu/menuitem_list" name="magemenu.page.bottom">
+				<action method="setBlockId">
+					<block_id>page-bottom</block_id>
+				</action>
+			</block>
+		</reference>
+	</default>
+</layout>

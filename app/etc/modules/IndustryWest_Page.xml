@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <IndustryWest_Page>
+        <active>false</active>
+        <codePool>local</codePool>
+    </IndustryWest_Page>
+  </modules>
+</config>

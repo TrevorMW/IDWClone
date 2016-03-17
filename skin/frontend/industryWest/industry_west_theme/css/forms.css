@@ -1,0 +1,121 @@
+/** INDUSTRY WEST SCSS THEME  Site By:  Version: 1.0.0  */
+input[type="text"], input[type="search"], input[type="password"], input[type="number"], input[type="email"], input[type="tel"], input[type="fax"], textarea { font-size: 14px; font-weight: 500; font-family: "lexia", serif; letter-spacing: 0; text-transform: none; background-color: #f3f3f3; padding: 15px 15px; border: 0; border-bottom: 2px solid transparent; border-radius: 0 !important; -webkit-border-radius: 0 !important; -webkit-appearance: none; }
+input[type="text"].no-display, input[type="search"].no-display, input[type="password"].no-display, input[type="number"].no-display, input[type="email"].no-display, input[type="tel"].no-display, input[type="fax"].no-display, textarea.no-display { display: none; }
+input[type="text"]::-webkit-input-placeholder, input[type="search"]::-webkit-input-placeholder, input[type="password"]::-webkit-input-placeholder, input[type="number"]::-webkit-input-placeholder, input[type="email"]::-webkit-input-placeholder, input[type="tel"]::-webkit-input-placeholder, input[type="fax"]::-webkit-input-placeholder, textarea::-webkit-input-placeholder { color: #262626; }
+input[type="text"]:-moz-placeholder, input[type="search"]:-moz-placeholder, input[type="password"]:-moz-placeholder, input[type="number"]:-moz-placeholder, input[type="email"]:-moz-placeholder, input[type="tel"]:-moz-placeholder, input[type="fax"]:-moz-placeholder, textarea:-moz-placeholder { /* Firefox 18- */ color: #262626; }
+input[type="text"]::-moz-placeholder, input[type="search"]::-moz-placeholder, input[type="password"]::-moz-placeholder, input[type="number"]::-moz-placeholder, input[type="email"]::-moz-placeholder, input[type="tel"]::-moz-placeholder, input[type="fax"]::-moz-placeholder, textarea::-moz-placeholder { /* Firefox 19+ */ color: #262626; }
+input[type="text"]:-ms-input-placeholder, input[type="search"]:-ms-input-placeholder, input[type="password"]:-ms-input-placeholder, input[type="number"]:-ms-input-placeholder, input[type="email"]:-ms-input-placeholder, input[type="tel"]:-ms-input-placeholder, input[type="fax"]:-ms-input-placeholder, textarea:-ms-input-placeholder { color: #262626; }
+input[type="text"]:focus, input[type="search"]:focus, input[type="password"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="fax"]:focus, textarea:focus { border-bottom: 2px solid #e97539; }
+input[type="text"].validation-failed, input[type="search"].validation-failed, input[type="password"].validation-failed, input[type="number"].validation-failed, input[type="email"].validation-failed, input[type="tel"].validation-failed, input[type="fax"].validation-failed, textarea.validation-failed { background-color: pink; }
+input[type="text"].validation-failed:focus, input[type="search"].validation-failed:focus, input[type="password"].validation-failed:focus, input[type="number"].validation-failed:focus, input[type="email"].validation-failed:focus, input[type="tel"].validation-failed:focus, input[type="fax"].validation-failed:focus, textarea.validation-failed:focus { border-color: darkred; }
+.cart-shipping-quotes input[type="text"], input[type="text"].white, .cart-shipping-quotes input[type="search"], input[type="search"].white, .cart-shipping-quotes input[type="password"], input[type="password"].white, .cart-shipping-quotes input[type="number"], input[type="number"].white, .cart-shipping-quotes input[type="email"], input[type="email"].white, .cart-shipping-quotes input[type="tel"], input[type="tel"].white, .cart-shipping-quotes input[type="fax"], input[type="fax"].white, .cart-shipping-quotes textarea, textarea.white { background-color: #fff; }
+.dob input[type="text"], .dob input[type="search"], .dob input[type="password"], .dob input[type="number"], .dob input[type="email"], .dob input[type="tel"], .dob input[type="fax"], .dob textarea { display: inline-block; width: 25%; margin-left: 15px; }
+.zip input[type="text"], .zip input[type="search"], .zip input[type="password"], .zip input[type="number"], .zip input[type="email"], .zip input[type="tel"], .zip input[type="fax"], .zip textarea { width: auto; }
+.tertiary input[type="text"], .checkout-widget input[type="text"], .tertiary input[type="search"], .checkout-widget input[type="search"], .tertiary input[type="password"], .checkout-widget input[type="password"], .tertiary input[type="number"], .checkout-widget input[type="number"], .tertiary input[type="email"], .checkout-widget input[type="email"], .tertiary input[type="tel"], .checkout-widget input[type="tel"], .tertiary input[type="fax"], .checkout-widget input[type="fax"], .tertiary textarea, .checkout-widget textarea { background-color: #fff; }
+.data-table input[type="text"], .data-table input[type="search"], .data-table input[type="password"], .data-table input[type="number"], .data-table input[type="email"], .data-table input[type="tel"], .data-table input[type="fax"], .data-table textarea { padding: 14px 15px; }
+.inline-input-field input[type="text"], .inline-input-field input[type="search"], .inline-input-field input[type="password"], .inline-input-field input[type="number"], .inline-input-field input[type="email"], .inline-input-field input[type="tel"], .inline-input-field input[type="fax"], .inline-input-field textarea { margin-bottom: 0; }
+#newsletter-popup input[type="text"], #newsletter-popup input[type="search"], #newsletter-popup input[type="password"], #newsletter-popup input[type="number"], #newsletter-popup input[type="email"], #newsletter-popup input[type="tel"], #newsletter-popup input[type="fax"], #newsletter-popup textarea { padding: 25px 15px; font-size: 12px; background-color: #cecdcd; color: #828181 !important; }
+
+.dob input[type="text"]:first-of-type { margin-left: 0; }
+
+textarea { padding: 23px 15px; }
+
+.utility input[type="search"]:focus, main input[type="search"]:focus { border: 0; }
+.utility input[type="search"] { margin: 0; }
+
+input[type="password"] { -webkit-text-security: disc; }
+
+input.qty { min-width: 50px; }
+
+select { font-size: 12px; font-weight: 600; letter-spacing: 2px; font-family: "proxima-nova-alt", "helvetica", sans-serif; text-transform: uppercase; background: #f3f3f3 url("../images/plus.png") no-repeat right 15px center; background-size: 8px 8px; height: 49px; border: 0; border-radius: 0; text-indent: 15px; -webkit-appearance: none; -moz-appearance: none; cursor: pointer; text-overflow: ''; padding-right: 35px; }
+@media screen and (min--moz-device-pixel-ratio: 0) { select { text-indent: 5px; } }
+select:focus { background-color: #eaeaea; }
+.small select { width: 45%; display: inline-block; margin-left: 15px; }
+.small select:first-child { margin-left: 0; }
+.cart-shipping-quotes select, aside select, select.white { background-color: #fff; }
+.pager select { width: 85px; height: 35px; display: inline-block; }
+select.validation-failed { background-color: pink; }
+.toolbar select { height: 38px; min-width: 125px; vertical-align: middle; }
+
+select option { text-transform: capitalize !important; }
+
+form fieldset { margin: 30px 0 40px 0; }
+form fieldset.form-submit { display: block; width: 100%; text-align: right; }
+form legend { padding: 0; }
+form ul, form ol { display: block; width: 100%; }
+form ul:after, form ol:after { *zoom: 1; content: " "; display: table; clear: both; }
+form li { float: left; width: 100%; padding: 10px 15px 10px 0; }
+form li.half { width: 49%; }
+form li.third { width: 33.333%; }
+form li.fourth { width: 25%; }
+form li.two-third { width: 66.667%; }
+form li.three-fourth { width: 75%; }
+form li.right { float: right; padding-right: 0; }
+form li.clear { clear: both; }
+form li.full { padding: 10px 0; width: 100%; }
+form li.no-display { padding: 0; display: none; }
+@media only screen and (max-width: 1024px) { form li { display: inline-block; vertical-align: top; float: none; }
+  form li.third { width: 49%; }
+  form li.two-third { width: 49%; }
+  form li.two-third.right { width: 100%; clear: both; }
+  form li.fourth { width: 49%; }
+  form li.three-fourth { width: 100%; }
+  form li.clear { clear: none; } }
+@media only screen and (max-width: 600px) { form li { padding: 15px 0; }
+  form li.half, form li.fourth, form li.third, form li.three-fourth, form li.two-third { width: 100%; }
+  form li.right { padding-right: 0; float: none; }
+  form li.clear { clear: both; } }
+form input, form select, form textarea { display: block; width: 100%; margin-bottom: 5px; }
+form.search-form input { background-color: #f3f3f3; padding: 11px 15px; border: 0; font-family: "proxima-nova-alt", "helvetica", sans-serif; font-size: 12px; font-weight: 700; color: #262626; letter-spacing: 2px; text-transform: uppercase; }
+aside form li { display: block; float: none; }
+[data-popup] form { display: none; -webkit-transition: opacity 0.3s; -moz-transition: opacity 0.3s; -ms-transition: opacity 0.3s; -o-transition: opacity 0.3s; transition: opacity 0.3s; }
+[data-popup] form.active-form { opacity: 1; display: block; }
+[data-popup] form li { padding: 8px 0 0 0; }
+[data-popup] form li.submit { text-align: right; padding-right: 0; }
+[data-popup] form li.submit button { margin-top: 15px; }
+
+.inline-inputs { display: table; width: 100%; table-layout: auto; }
+.inline-inputs .inline-input-field, .inline-inputs .btn { display: table-cell; width: auto; vertical-align: bottom; margin: 0; }
+.inline-inputs .btn { height: 49px; }
+.inline-inputs .inline-input-field { padding-right: 15px; }
+.inline-inputs i { position: relative; top: -3px; font-size: 15px; }
+
+.checkbox { padding: 4px 0; }
+.checkbox input, .checkbox label { display: inline-block; vertical-align: middle; width: auto; margin: 0; }
+.checkbox label { padding-left: 12px; }
+.shipping-methods .checkbox { padding: 10px 8px 8px 8px; margin-bottom: 5px; }
+.checkbox .payment-method-container label { padding: 5px 0; }
+@media only screen and (max-width: 600px) { .checkbox input, .checkbox label { vertical-align: middle; }
+  .checkbox label { max-width: 90%; } }
+
+form li.checkbox { margin: 0; padding: 0 0 5px 0; }
+
+.add-to-cart input.qty { background-color: #fff; max-width: 80px; display: block; margin: 15px 0; text-align: center; min-width: 80px; }
+
+.cart-product-amounts .qty { text-align: center; }
+
+.search-form { position: relative; margin: 0; }
+.search-form input { width: 100%; }
+.header .search-form input { padding: 10px; font-size: 12px; font-weight: 600; }
+.search-form i { position: relative; top: -1px; left: -1px; }
+.catalog-category-view .search-form input { margin: 0; }
+.category-shop .search-form, .category-collections .search-form { float: right; }
+.category-shop .search-form input, .category-collections .search-form input { width: 100%; min-width: 250px; margin: 0; height: 39px; }
+.toolbar .search-form { margin-top: 0; }
+@media only screen and (max-width: 1024px) { .catalog-category-view .search-form { display: block; width: 100%; float: none; }
+  .catalog-category-view .search-form input { width: 100%; } }
+@media only screen and (max-width: 600px) { .toolbar .search-form { border-top: 2px solid #f3f3f3; }
+  .mobile-active .search-form input { width: 100%; padding: 15px; } }
+
+.validation-advice { display: inline-block; width: auto; clear: both; color: darkred; font-weight: 500; padding-top: 5px; }
+.inline-input-field .validation-advice { padding-top: 10px; }
+.small .validation-advice { display: none; }
+
+[data-newsletter-signup] ul { width: 100%; }
+[data-newsletter-signup] li { float: none; padding: 0; width: 100%; display: block; text-align: center !important; }
+[data-newsletter-signup] [data-loader] { display: inline; }
+[data-newsletter-signup] [data-loader] i { color: #fff; font-size: 20px; }
+
+[data-signup-error] { font-size: 16px; line-height: 26px; }
+[data-signup-error].error { color: red; }
+[data-signup-error].success { color: green; }

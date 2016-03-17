@@ -1,0 +1,87 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ *
+ *
+ * Category view template
+ *
+ * @see Mage_Catalog_Block_Category_View
+ */
+
+$_helper   = $this->helper('catalog/output');
+$_category = $this->getCurrentCategory();
+$title     = $_category->getName();
+
+if( $_category->getId() == 3 ) { ?>
+
+<header class="page-header">
+  <h1 class="page-title"><span>Shop our exclusive and classic designs</span></h1>
+</header>
+
+<?php } else if( $_category->getId() == 208 ) { ?>
+
+<header class="page-header">
+  <h1 class="page-title"><span>Our Collections</span></h1>
+</header>
+
+<?php } else { ?>
+
+<?php }
+
+echo $this->getMessagesBlock()->toHtml() ?>
+
+<?php if( $_category->getData('is_collection') ) { echo $this->getChildHtml('catalogCategoryNav');  }; ?>
+
+<?php if( $_category->getImage() != null ): ?>
+  <div class="wrapper catalog-hero">
+    <img src="<?php echo Mage::getBaseUrl('media').'catalog/category/'.$_category->getImage() ?>" alt="" />
+    <div class="wrapper table catalog-hero-inner">
+      <div class="table-cell catalog-hero-headline">
+        <h2 class="catalog-hero-title"><?php echo $_category->getName(); ?></h2>
+      </div>
+    </div>
+  </div>
+<?php endif; $_description = $this->getCurrentCategory()->getDescription() ?>
+
+
+<?php if( $_category->getId() != 3 && $_category->getId() != 208 ) { ?>
+<header class="category-header">
+  <?php if( $_category->getData('is_collection') ) { if( $title != null ){ ?><br /><h1><?php echo $title ?></h1> <?php } } ?>
+  <?php if( $_description != null ) { ?> <br /><p><?php echo $_description ?></p><?php } ?>
+</header>
+<?php } ?>
+
+<?php echo $this->getChildHtml('catNav');?>
+
+<?php if( $this->isContentMode() ): ?>
+    <?php echo $this->getCmsBlockHtml() ?>
+<?php elseif($this->isMixedMode()): ?>
+    <?php echo $this->getCmsBlockHtml() ?>
+    <?php echo $this->getProductListHtml() ?>
+<?php else: ?>
+    <?php echo $this->getProductListHtml() ?>
+<?php endif; ?>
+
+
+

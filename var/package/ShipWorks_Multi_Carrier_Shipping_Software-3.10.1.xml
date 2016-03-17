@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+    <name>ShipWorks_Multi_Carrier_Shipping_Software</name>
+    <version>3.10.1</version>
+    <stability>stable</stability>
+    <license>Commercial</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>ShipWorks 3.0 Integration</summary>
+    <description>Allows your ShipWorks 3.0 application to integrate with your online store.</description>
+    <notes>Updated to support Magento Community and Enterprise</notes>
+    <authors><author><name>ShipWorks</name><user>Administrator</user><email>support@shipworks.com</email></author></authors>
+    <date>2015-01-28</date>
+    <time>22:10:55</time>
+    <contents><target name="magelocal"><dir><dir name="Interapptive"><dir name="ShipWorks"><dir name="Helper"><file name="Data.php" hash="3df8007ff0f7ec4b619e633ebf4fbaf9"/></dir><dir name="Model"><file name="ItemAttributes.php" hash="16149db3abc101922f6a06bcce7d0e10"/><dir name="Objectmodel"><file name="Api.php" hash="0409c9c4519bd9ed4e37e5267d5e3818"/></dir><file name="Version.php" hash="b6ec828d206fc1dd137bae2fb55a7f85"/></dir><dir name="etc"><file name="adminhtml.xml" hash="fcb9ca5fa9a0be357c9bcbc697a56f8a"/><file name="api.xml" hash="1124243c22d9f352472172db4f825b96"/><file name="config.xml" hash="b2093dab43d7f4c457e63c5c7ed9dcda"/><file name="system.xml" hash="8ffba3c8888c3d61d28556f0f91c184f"/></dir></dir></dir><dir name=".."><dir name=".."><dir name="etc"><dir name="modules"><file name="Interapptive_ShipWorks.xml" hash="f6abb1488fd579321de6b47245af4bf9"/></dir></dir></dir></dir></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.2.0</min><max>6.0.0</max></php></required></dependencies>
+</package>

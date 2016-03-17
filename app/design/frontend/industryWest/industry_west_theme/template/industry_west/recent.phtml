@@ -1,0 +1,57 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     IndustryWest_Theme
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ *
+ *
+ * @var Mage_Page_Block_Html_Header $this
+ *
+ */
+
+$posts = $this->getPosts(); $i = 0;  ?>
+
+<div class="wrapper about-us-recent-posts" id="js-posts">
+  <div class="container">
+    <div class="fake-fieldset">
+      <?php if ($title = $this->getTitle()): ?>
+      <h3 class="legend">About the Studio</h3>
+      <?php endif; ?>
+      <ul id="<?php echo $this->getListId() ?>">
+        <?php if (count($posts) > 0 ): ?>
+    			<?php foreach($posts as $post): if( $i < 3 ){ ?>
+    				<li class="recent-post">
+    				  <article>
+      				  <header>
+        				  <div class="post-meta"><time><?php echo $this->htmlEscape($post->getPostDate()) ?></time></div>
+                  <h3><?php echo $this->htmlEscape($post->getPostTitle()) ?></h3>
+      				  </header>
+    				  </article>
+    				  <a href="<?php echo $post->getPermalink() ?>" title="<?php echo $this->htmlEscape($post->getPostTitle()) ?>" class="btn btn-orange">Read Post</a>
+    				</li>
+    			<?php } $i++; endforeach; ?>
+        <?php endif; ?>
+      </ul>
+    </div>
+  </div>
+</div>
+

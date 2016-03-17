@@ -1,0 +1,28 @@
+<?php 
+$this->setImageAsBackground(true);
+$this->getBlock()->addElementOptions('class', 'div', array('magemenu-menu', 'nav-horizontal navbar onlinebiz-magemenu'));
+?>
+<div<?php echo $this->getBlock()->getElementOptions('div') ?>>
+    <div class="header-nav">
+        <h4 class="no-display"><?php echo $this->getName() ?></h4>
+		<ul class="nav-horizontal">
+			<?php echo $this->getMenu() ?>
+	    </ul>	
+    </div>
+    <?php echo $this->getChildHtml('topLeftLinks') ?>
+</div>
+
+<?php if(Mage::getStoreConfig('magemenu/general/use_responsive')):?>
+<div class="nav-accordion magemenu-responsive">
+    <div class="navbar-inner">
+		<a class="responsivebar show-responsive-bar"><?php echo $this->__('Menu')?></a>
+		<div class="nav-collapse">
+			<ul class="nav nav-tabs  nav-stacked accordion" id="accordion">
+				<?php foreach ($this->getMenuNodes() as $key => $node): ?>
+					<?php echo $this->drawResponsiveMenuItem($node) ?>
+				<?php endforeach ?>
+			</ul>
+		</div>
+    </div>
+</div>
+<?php endif;?>

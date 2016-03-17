@@ -1,0 +1,39 @@
+<!--@subject Welcome, {{var customer.name}}! @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"var logo_url":"Email Logo Image Url",
+"htmlescape var=$customer.name":"Customer Name",
+"store url=\"customer/account/\"":"Customer Account Url",
+"var customer.email":"Customer Email",
+"htmlescape var=$customer.password":"Customer Password"}
+@-->
+
+<!--@styles
+@-->
+
+{{template config_path="design/email/header"}}
+{{inlinecss file="email-inline.css"}}
+
+<table cellpadding="0" cellspacing="0" border="0">
+    <tr>
+        <td class="action-content">
+            <p>Thank you for creating a Commercial Account with {{var store.getFrontendName()}}. We look forward to providing solutions for all of your commercial furniture needs.
+Industry West’s commercial partners have access to discount pricing and our team of associates who can provide solutions tailored to meet your needs.</p>
+            <p>You can login to your account <a href="{{store url="customer/account/"}}">here</a> or <a href="{{store url="customer/account/"}}">Login</a> or <a href="{{store url="customer/account/"}}">My Account</a> links on industrywest.com</p>
+            <p class="highlighted-text">
+                Use the following values when prompted to log in:<br/>
+                <strong>Email</strong>: {{var customer.email}}<br/>
+                <strong>Password</strong>: {{htmlescape var = customer.password}}
+            </p>
+            <br />
+            <p> If you have any questions, please feel free to contact me at <a href="mailto:commercialorder@industrywest.com">commercialorder@industrywest.com</a>
+                {{depend store_phone}} or by phone at <a href="tel:{{var phone}}">{{var store_phone}}</a>{{/depend}}.</p>
+            <p>
+              <strong>Brian Doll</strong><br />Commercial Sales
+              <br />Industry West
+            </p>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer"}}

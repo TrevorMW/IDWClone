@@ -1,0 +1,13 @@
+<?php
+/**
+ * @see IndustryWest_CustomTabs_Block_Tabs_Warranty
+ */
+
+$html = '';
+$current_product = $this->getProduct();
+$warranty = $this->getWarrantyCare();
+
+$warranty != null && is_object( $current_product ) ? $html .= $warranty : $html .= '<p>'.$current_product->getName().' has no specific warranty information.</p>';
+$html .= '<br /><br /><a href="'.Mage::getUrl('warranty').'" class="btn btn-small btn-orange">View full product warranties</a>';
+
+echo $html;

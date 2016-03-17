@@ -1,0 +1,81 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+
+$_order = $this->getOrder();
+$_links = $this->getLinks();
+$status = $_order->getStatusLabel() ?>
+
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+
+<header class="page-header title-buttons">
+  <h1 class="page-title"><?php echo $this->__('Order #%s', $_order->getRealOrderId()) ?></h1>
+</header>
+
+<?php if( $_order->getStatusLabel() != null ) : ?>
+  <div class="grey-box status status-<?php echo str_replace( ' ','-', strtolower( $status ) ) ?>">
+    <p>Order Status: <?php echo $status ?></p>
+  </div>
+<?php endif; ?>
+
+<?php echo $this->getStatusHistoryRssUrl($_order) ?>
+
+
+<div class="col grey-box"><h4><?php echo $this->__('Order Date')?></h4><p class="order-date"><?php echo $this->__(' %s', $this->formatDate($_order->getCreatedAtStoreDate(), 'long')) ?></p></div>
+
+
+<div class="wrapper order-info-box">
+  <div class="col half grey-box">
+    <h4><?php echo $this->__('Billing Address') ?></h4>
+    <address><p><?php echo $_order->getBillingAddress()->format('html') ?></p></address>
+  </div>
+  <?php if (!$_order->getIsVirtual()): ?>
+    <div class="col half right grey-box">
+      <h4><?php echo $this->__('Shipping Address') ?></h4>
+      <address><p><?php echo $_order->getShippingAddress()->format('html') ?></p></address>
+    </div>
+  <?php endif; ?>
+</div>
+
+
+<div class="wrapper order-info-box">
+  <div class="col half grey-box">
+    <h4><?php echo $this->__('Payment Method') ?></h4>
+    <?php echo $this->getPaymentInfoHtml() ?>
+  </div>
+  <?php if (!$_order->getIsVirtual()): ?>
+    <div class="col half right grey-box">
+      <h4><?php echo $this->__('Shipping Method') ?></h4>
+      <?php if ($_order->getShippingDescription()): ?>
+        <p><?php echo $this->escapeHtml($_order->getShippingDescription()) ?></p>
+      <?php else: ?>
+        <p><?php echo $this->helper('sales')->__('No shipping information available'); ?></p>
+      <?php endif; ?>
+    </div>
+  <?php endif; ?>
+</div>
+
+

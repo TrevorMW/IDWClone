@@ -1,0 +1,82 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Blog
+ * @version    1.3.4
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+
+$posts = $this->getPosts(); ?>
+
+<div id="messages_product_view">
+  <?php Mage::app()->getLayout()->getMessagesBlock()->setMessages(Mage::getSingleton('customer/session')->getMessages(true)); ?>
+  <?php echo Mage::app()->getLayout()->getMessagesBlock()->getGroupedHtml(); ?>
+</div>
+
+<div class="wrapper blog-list">
+  <div class="container">
+    <ul class="posts magazine-posts">
+
+      <?php foreach ( $posts as $post ):  $postCats = $post->getCats(); ?>
+
+        <li class="post magazine-post">
+          <article>
+            <div class="post-img"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$post->getFeaturedImage() ?>" alt="" /></div>
+            <div class="content">
+              <header class="header">
+                <div class="meta">
+                    <div class="categories">
+                      <?php if ( !empty( $postCats ) ): $i = 0;
+                          foreach ( $postCats as $data ): ?>
+                            <a href="<?php echo $data['url']; ?>"><?php $i == 0 ? print $data['title'] : print ', '.$data['title'] ;  ?></a>
+                          <?php $i++; endforeach;
+                      endif; ?>
+                    </div>
+                  </div>
+                <h1 class="title"><a href="<?php echo $post->getAddress(); ?>"><?php echo $post->getTitle(); ?></a></h1>
+              </header>
+              <div class="short-desc white">
+                <p><?php echo $post->getShortContent()  ?></p>
+                <span></span>
+              </div>
+              <footer>
+                <time>
+                  <?php echo $post->getCreatedTime(); ?>
+                </time>
+              </footer>
+            </div>
+          </article>
+        </li>
+
+      <?php endforeach; ?>
+      </ul>
+  </div>
+</div>
+
+<?php //echo $this->getChildHtml('aw_blog_comments_toolbar'); ?>
+
+<!--
+    <div class="postDetails">
+        <?php if ($this->getCommentsEnabled()): ?>
+            <?php echo $post->getCommentCount(); ?>
+        <?php endif; ?>
+    </div>
+-->

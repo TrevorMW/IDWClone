@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<config>
+    <includes>
+        <default>
+        	<OnlineBiz_MageMenu_Block_Collection/>
+        	<OnlineBiz_MageMenu_Block_Menuitem/>
+        	<OnlineBiz_MageMenu_Block_Menuitem_Node/>
+        	<OnlineBiz_MageMenu_Helper_Menuitem/>
+        	<OnlineBiz_MageMenu_Model_Abstract/>
+        	<OnlineBiz_MageMenu_Model_Menuitem_Source_Display/>
+        	<OnlineBiz_MageMenu_Model_Menuitem_Type_Abstract/>
+        	<OnlineBiz_MageMenu_Model_Menuitem_Type_Category/>
+        	<OnlineBiz_MageMenu_Model_Menuitem_Type_External/>
+        	<OnlineBiz_MageMenu_Model_Menuitem_Type_Internal/>
+        	<OnlineBiz_MageMenu_Model_Menuitem_Type_Nowhere/>
+        	<OnlineBiz_MageMenu_Model_Menuitem_Type_Product/>
+        	<OnlineBiz_MageMenu_Model_Resource_Eav_Attribute/>
+        	<OnlineBiz_MageMenu_Model_Resource_Eav_Mysql4_Abstract/>
+        	<OnlineBiz_MageMenu_Model_Resource_Eav_Mysql4_Menuitem/>
+        	<OnlineBiz_MageMenu_Model_Resource_Eav_Mysql4_Menuitem_Collection/>
+        	<OnlineBiz_MageMenu_Model_Resource_Eav_Mysql4_Menuitem_Tree/>
+        </default>
+    </includes>
+</config>

@@ -1,0 +1,151 @@
+// VARIABLES
+
+$baseFont:"lexia",serif;
+$headingFont:"proxima-nova-alt", "helvetica",sans-serif;
+$accentFont: "tablet-gothic-compressed", "impact", sans-serif;
+//$accentFontReg: "tablet-gothic",sans-serif;
+
+$lightBlack:#262626;
+$lightGray: #f3f3f3;
+$sortaLightGray: #d6d6d6;
+$normalGray: #bfbfbf;
+$mediumGray: #484847;
+$darkGray:#262626;
+$goldenrod:#f8a530;
+$tangerine:#e97539;
+$text: #777677;
+// goldenrod color:#f8a530
+
+$success: #bef8be;
+$info: #fddd90;
+$error: #fd976f;
+
+// MIXINS
+
+@mixin transition($args)
+{
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+@mixin gradient ($from, $to)
+{
+  //background: -webkit-gradient(linear, left top, left bottom, from($from), to($to));
+  background: -webkit-gradient(linear, left top, left bottom, color-stop($from), color-stop($to));
+  background: -moz-linear-gradient(top,  $from, $to);
+  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}');
+}
+
+// @extend %clearfix;
+@mixin clearfix
+{
+  *zoom: 1;
+  content: " ";
+  display: table;
+  clear: both;
+}
+
+@mixin placeholders($args)
+{
+  &::-webkit-input-placeholder {
+     color: $args;
+  }
+
+  &:-moz-placeholder { /* Firefox 18- */
+     color: $args;
+  }
+
+  &::-moz-placeholder {  /* Firefox 19+ */
+     color: $args;
+  }
+
+  &:-ms-input-placeholder {
+     color: $args;
+  }
+}
+
+
+// HACKS
+@mixin firefox-only {
+  @media screen and (min--moz-device-pixel-ratio:0) {
+    @content;
+  }
+}
+
+// BREAKPOINTS
+@mixin above-2000 {
+  @media only screen and (min-width: 2000px) {
+    @content;
+  }
+}
+@mixin above-1281 {
+  @media only screen and (min-width: 1281px) {
+    @content;
+  }
+}
+
+@mixin below-1700 {
+  @media only screen and (max-width: 1700px) {
+    @content;
+  }
+}
+@mixin below-1500 {
+  @media only screen and (max-width: 1500px) {
+    @content;
+  }
+}
+
+@mixin below-1280 {
+  @media only screen and (max-width: 1280px) {
+    @content;
+  }
+}
+@mixin below-1130 {
+  @media only screen and (max-width: 1131px) {
+    @content;
+  }
+}
+@mixin below-1024 {
+  @media only screen and (max-width: 1024px) {
+    @content;
+  }
+}
+@mixin below-800 {
+  @media only screen and (max-width: 800px) {
+    @content;
+  }
+}
+@mixin below-600 {
+  @media only screen and (max-width: 600px) {
+    @content;
+  }
+}
+@mixin below-480 {
+  @media only screen and (max-width: 480px) {
+    @content;
+  }
+}
+
+@mixin between-1280-1025 {
+  @media only screen and (max-width: 1280px) and (min-width:1025px) {
+    @content;
+  }
+}
+@mixin between-1024-801 {
+  @media only screen and (max-width: 1024px) and (min-width:801px) {
+    @content;
+  }
+}
+@mixin between-800-601 {
+  @media only screen and (max-width: 800px) and (min-width:601px) {
+    @content;
+  }
+}
+@mixin between-600-300 {
+  @media only screen and (max-width: 600px) and (min-width:300px) {
+    @content;
+  }
+}

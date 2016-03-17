@@ -1,0 +1,624 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+
+	<default>
+
+    <remove name="paypal.partner.right.logo" />
+    <remove name="store_switcher" />
+    <remove name="product.tooltip" />
+    <remove name="copyright.blog.footer" />
+    <remove name="right.reports.product.viewed" />
+    <remove name="sale.reorder.sidebar" />
+
+		<!-- SET UP ADDITIONAL STRUCTURAL BLOCKS TO COMPLIMENT THE RWD THEME"S BLOCKS -->
+		<reference name="root">
+
+  		<block type="core/text_list" name="home_slider" as="homeSlider" translate="label">
+	      <label>BANNER</label>
+      </block>
+
+      <block type="core/text_list" name="banner" as="page_banner" translate="label">
+	      <label>BANNER</label>
+      </block>
+
+      <block type="core/text_list" name="rabbits" as="page_rabbits" translate="label">
+	      <label>RABBITS</label>
+      </block>
+
+      <block type="core/text_list" name="featured" as="featured_products" translate="label">
+	      <label>FEATURED PRODUCTS</label>
+      </block>
+
+      <block type="core/text_list" name="product-images" as="productImages" translate="label">
+        <label>PRODUCT IMAGES</label>
+      </block>
+
+      <block type="core/text_list" name="product-data" as="productData" translate="label">
+        <label>PRODUCT DATA</label>
+      </block>
+
+      <block type="core/text_list" name="scroll_to" as="scrollTo" before="content" translate="label">
+        <label>SCROLL TO HANDLE</label>
+      </block>
+
+      <block type="core/text_list" name="horizontal_gallery" as="horizontalGallery" after="content" translate="label">
+        <label>HORIZONTAL GALLERY BLOCK</label>
+      </block>
+
+      <block type="core/text_list" name="timeline" as="timeline" after="content" translate="label">
+        <label>HORIZONTAL GALLERY BLOCK</label>
+      </block>
+
+      <block type="core/text_list" name="contact_form" as="contact_form" after="content" translate="label">
+        <label>HORIZONTAL GALLERY BLOCK</label>
+      </block>
+
+      <block type="core/text_list" name="blog_container" as="blogContainer" before="content" translate="label">
+        <label>BLOG CONTAINER</label>
+      </block>
+
+      <block type="core/text_list" name="contact_columns" as="contactColumns" translate="label">
+        <label>BLOG CONTAINER</label>
+      </block>
+
+      <block type="core/text_list" name="contact_form" as="contactForm" translate="label">
+        <label>BLOG CONTAINER</label>
+      </block>
+
+      <block type="core/text_list" name="about_page_rabbits" as="aboutRabbits" translate="label">
+        <label>About Page Rabbits</label>
+      </block>
+
+      <action method="unsetChild"><name>global_messages</name></action>
+
+    </reference>
+
+		<reference name="head">
+
+			<action method="removeItem"><type>skin_css</type><name>wordpress/styles.css</name></action>
+			<action method="removeItem"><type>skin_js</type><name>fishpig/wordpress/search.js</name></action>
+
+			<action method="removeItem"><type>skin_css</type><name>css/styles-ie8.css</name><params/><if><![CDATA[ (lte IE 8) & (!IEMobile)]]></if></action>
+			<action method="removeItem"><type>skin_css</type><name>css/madisonisland-ie8.css</name><params/><if><![CDATA[ (lte IE 8) & (!IEMobile)]]></if></action>
+			<action method="removeItem"><type>skin_css</type><name>css/styles.css</name><params/><if><![CDATA[<!--[if (gte IE 9) | (IEMobile)]><!-->]]></if></action>
+			<action method="removeItem"><type>skin_css</type><name>css/madisonisland.css</name><params/><if><![CDATA[<!--[if (gte IE 9) | (IEMobile)]><!-->]]></if></action>
+
+      <action method="removeItem"><type>skin_css</type><name>onlinebizsoft/magemenu/css/magemenu.css</name></action>
+      <action method="removeItem"><type>skin_css</type><name>onlinebizsoft/magemenu/css/navresponsive.css</name></action>
+      <action method="removeItem"><type>skin_js</type><name>onlinebizsoft/magemenu/magemenu.js</name></action>
+      <action method="removeItem"><type>skin_js</type><name>onlinebizsoft/magemenu/treenavi.js</name></action>
+      <action method="removeItem"><type>skin_js</type><name>onlinebizsoft/magemenu/explodedmenu.js</name></action>
+      <action method="removeItem"><type>skin_js</type><name>js/slideshow.js</name></action>
+      <action method="addItem"><type>skin_js</type><name>js/cookie.js</name></action>
+
+			<action method="addLinkRel"><rel>stylesheet</rel><href>//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css</href></action>
+			<action method="addItem"><type>skin_css</type><name>css/industry_west.css</name></action>
+
+			<action method="addItem"><type>skin_js</type><name>js/general.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/scrollto.js</name></action>
+
+		</reference>
+
+		<reference name="header">
+      <block type="page/html_breadcrumbs" name="breadcrumbs" as="breadcrumbs"/>
+      <block type="page/html_notices" name="global_notices" as="global_notices" template="page/html/notices.phtml" />
+
+      <block type="core/text_list" name="discount_message" as="discountMsg" translate="label">
+        <label>Discount Message</label>
+      </block>
+
+      <block type="core/text_list" name="category_message" as="categoryMsg" translate="label">
+        <label>Category Message</label>
+      </block>
+
+    </reference>
+
+    <reference name="discount_message">
+      <block type="core/template" template="industry_west/discount-notice.phtml" name="discountMsg" as="discountMessage" />
+    </reference>
+
+    <reference name="category_message">
+      <block type="core/template" template="industry_west/category-notice.phtml" name="categoryMsg" as="categoryMessage" />
+    </reference>
+
+    <reference name="content">
+      <action method="unsetChild"><name>page_content_heading</name></action>
+    </reference>
+
+		<reference name="footer">
+			<remove name="footer_links" />
+			<remove name="footer_links2" />
+			<remove name="footer_links3" />
+			<remove name="footer_links4" />
+			<remove name="footer.newsletter" />
+			<remove name="cms_footer_links" />
+			<remove name="cms_footer_links_sm" />
+
+
+			<block type="core/template" template="page/html/custom-footer-top.phtml" name="footer_top" as="footer_top" />
+			<block type="core/template" template="industry_west/newsletter-signup.phtml" name="newsletter" as="newsletter_signup" />
+		</reference>
+
+	</default>
+
+	<home_page_template>
+
+		<reference name="root">
+      <action method="setTemplate"><template>page/1column-homepage.phtml</template></action>
+      <action method="setIsHandle"><applied>1</applied></action>
+    </reference>
+
+		<reference name="head">
+  		<action method="addItem"><type>skin_css</type><name>css/bxslider.css</name></action>
+  		<action method="addItem"><type>skin_css</type><name>css/slick-normal.css</name></action>
+
+      <action method="addItem"><type>skin_js</type><name>js/bxslider.js</name></action>
+      <action method="addItem"><type>skin_js</type><name>js/home_slider.js</name></action>
+  	  <action method="addItem"><type>skin_js</type><name>js/slick-normal.js</name></action>
+  	  <action method="addItem"><type>skin_js</type><name>js/featured_products.js</name></action>
+	  </reference>
+
+	  <reference name="header">
+      <action method="unsetChild"><name>breadcrumbs</name></action>
+    </reference>
+
+    <reference name="home_slider">
+			<block type="cms/block" name="main_slider">
+  				<action method="setBlockId">
+  				  <block_id>slider_data</block_id>
+  				</action>
+  		</block>
+		</reference>
+
+		<reference name="rabbits">
+
+			<!-- HOMEPAGE RABBIT CONTENT BLOCK -->
+			<block type="core/template" name="home_rabbits" template="industry_west/rabbit_holes.phtml">
+				<block type="cms/block" name="category_rabbit">
+					<action method="setBlockId">
+						<block_id>category_rabbit</block_id>
+					</action>
+				</block>
+				<block type="cms/block" name="about_rabbit">
+					<action method="setBlockId">
+						<block_id>about_rabbit</block_id>
+					</action>
+		    </block>
+				<block type="cms/block" name="new_arrivals_rabbits">
+					<action method="setBlockId">
+						<block_id>new_arrivals</block_id>
+					</action>
+				</block>
+			</block>
+
+		</reference>
+
+    <reference name="featured">
+
+      <block type="core/template" name="featured_products" after="rabbits" template="industry_west/featured_products.phtml">
+        <label>Featured Products</label>
+        <block type="cms/block" name="featured_products_slider">
+				  <action method="setBlockId">
+						<block_id>featured_products</block_id>
+					</action>
+				</block>
+      </block>
+
+	  </reference>
+
+    <reference name="content">
+      <action method="unsetChild"><name>page_content_heading</name></action>
+  	</reference>
+
+  </home_page_template>
+
+  <cms_page>
+
+    <reference name="header">
+      <action method="unsetChild"><name>breadcrumbs</name></action>
+    </reference>
+
+  </cms_page>
+
+  <catalog_category_default>
+
+    <reference name="root">
+      <action method="setTemplate"><template>page/1column.phtml</template></action>
+    </reference>
+
+    <reference name="header">
+      <action method="unsetChild"><name>breadcrumbs</name></action>
+    </reference>
+
+  </catalog_category_default>
+
+  <catalog_category_view>
+
+    <reference name="root">
+      <block type="core/text_list" name="new_pagination" as="newPagination" after="product" translate="label">
+        <label>PAGINATION</label>
+        <update handle="product_list_toolbar_pager"/>
+      </block>
+    </reference>
+
+    <reference name="header">
+      <action method="unsetChild"><name>breadcrumbs</name></action>
+    </reference>
+
+    <reference name="product_list_toolbar">
+      <block type="core/template" name="top.search" as="customTopSearch" template="catalogsearch/form.mini.phtml"/>
+    </reference>
+
+    <reference name="product_list.after">
+      <block type="core/text_list" name="bottom.catalog.pagination" as="bottomPagination" translate="label">
+  	    <label>BANNER</label>
+  	    <block type="page/html_pager" name="product_list_toolbar_pager"/>
+      </block>
+    </reference>
+
+  </catalog_category_view>
+
+  <catalog_category_layered>
+
+    <remove name="left_first"/>
+
+    <reference name="root">
+      <action method="setTemplate"><template>page/1column.phtml</template></action>
+    </reference>
+
+    <reference name="content">
+      <block type="catalog/navigation" name="catalog.category.nav" before="-" as="catalogCategoryNav" template="industry_west/category_nav.phtml"/>
+    </reference>
+
+    <reference name="category.products">
+      <block type="catalog/layer_view" name="catalog.leftnav" before="product_list" as="catNav" template="catalog/layer/view.phtml">
+        <block type="core/text_list" name="catalog.leftnav.state.renderers" as="state_renderers" />
+      </block>
+    </reference>
+
+    <reference name="product_list.name.after">
+      <remove name="product_list.swatches" />
+    </reference>
+
+  </catalog_category_layered>
+
+  <catalogsearch_result_index>
+
+    <reference name="root">
+      <action method="setTemplate"><name>page/1column.phtml</name></action>
+    </reference>
+
+  </catalogsearch_result_index>
+
+  <catalog_product_view>
+
+    <remove name="product.info.addto"/>
+    <remove name="product.info.sharing" />
+    <remove name="product_tag_list"/>
+    <remove name="product.info.upsell" />
+
+    <reference name="root">
+      <action method="setTemplate"><template>page/1column.phtml</template></action>
+    </reference>
+
+    <reference name="head">
+      <!-- <action method="addItem"><type>skin_css</type><name>css/owl.carousel.css</name></action> -->
+  		<!-- <action method="addItem"><type>skin_css</type><name>css/owl.css</name></action> -->
+  		<action method="addItem"><type>skin_css</type><name>css/slick-normal.css</name></action>
+  		<action method="addItem"><type>skin_css</type><name>css/product-print.css</name><params>media="print"</params></action>
+  		<action method="addItem"><type>skin_js</type><name>js/slick-normal.js</name></action>
+  		<action method="addItem"><type>skin_js</type><name>js/product-thumbnails.js</name></action>
+      <action method="addItem"><type>skin_js</type><name>js/tabs.js</name></action>
+    </reference>
+
+    <reference name="product.info">
+      <block type="core/text_list" name="product.additional.info" as="productExtraInfo" translate="label">
+        <label>PRODUCT ADDITIONAL DATA</label>
+        <block type="cms/block" name="cart_questions" as="productInquiries">
+      		<action method="setBlockId">
+            <block_id>product_alternate_info</block_id>
+      		</action>
+        </block>
+      </block>
+    </reference>
+
+  </catalog_product_view>
+
+  <wordpress_index_index>
+
+    <reference name="header">
+      <action method="unsetChild"><name>breadcrumbs</name></action>
+    </reference>
+
+    <reference name="banner">
+      <block type="core/template" name="page_banner" after="header" template="industry_west/banner.phtml">
+        <action method="setData"><name>banner_url</name><value>/images/bg-magazine.jpg</value></action>
+        <action method="setData"><name>banner_caption</name><value>Industry West Blog</value></action>
+      </block>
+    </reference>
+
+  </wordpress_index_index>
+
+  <wordpress_post_category_view>
+
+    <reference name="header">
+      <action method="unsetChild"><name>breadcrumbs</name></action>
+    </reference>
+
+  </wordpress_post_category_view>
+
+  <wordpress_post_tag_view>
+
+    <reference name="root">
+      <action method="setTemplate"><template>page/1column-banner.phtml</template></action>
+    </reference>
+
+  </wordpress_post_tag_view>
+
+  <wordpress_post_view>
+
+    <remove name="catalog.compare.sidebar" />
+
+    <reference name="root">
+      <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+    </reference>
+
+    <reference name="head">
+      <action method="addItem"><type>skin_js</type><name>js/fb.js</name></action>
+    </reference>
+
+    <reference name="right">
+      <block type="core/text_list" name="post_tags" as="postTags" translate="label">
+        <label>Post Tags</label>
+        <block type="wordpress/post_view" name="tag_cloud" template="industry_west/post-tags.phtml"/>
+      </block>
+      <block type="core/template" name="magazine_social" template="industry_west/social.phtml" />
+    </reference>
+
+    <reference name="post.content.after">
+      <block type="core/text_list" name="post_tags" as="postTags" translate="label">
+        <label>Post Tags</label>
+        <block type="wordpress/post_view" name="tag_cloud" template="industry_west/post-tags.phtml"/>
+      </block>
+      <block type="wordpress/post_view" name="magazine_social" template="industry_west/social.phtml" />
+    </reference>
+
+  </wordpress_post_view>
+
+  <customer_account_login>
+
+    <reference name="root">
+      <action method="setTemplate"><template>page/1column.phtml</template></action>
+    </reference>
+
+  </customer_account_login>
+
+  <customer_account>
+
+    <reference name="header">
+      <action method="unsetChild"><name>breadcrumbs</name></action>
+    </reference>
+
+  </customer_account>
+
+  <PRODUCT_TYPE_configurable>
+
+    <reference name="product.info.options.wrapper">
+        <block type="catalog/product_view_type_configurable" name="product.info.options.configurable" as="options_configurable" before="-">
+            <action method="setTemplate">
+                <template>attributeswatches/catalog_product_view_type_options_configurable.phtml</template>
+            </action>
+        </block>
+    </reference>
+
+  </PRODUCT_TYPE_configurable>
+
+  <onestepcheckout_index_index>
+
+    <reference name="head">
+      <action method="addItem"><type>skin_css</type><name>css/checkout.css</name></action>
+      <action method="addItem"><type>skin_js</type><name>js/checkout.js</name></action>
+    </reference>
+
+    <reference name="onestepcheckout.checkout">
+      <block type="core/text_list" name="login-form-box" as="LoginFormBox">
+        <block type="core/template" template="onestepcheckout/login_popup.phtml" name="login-popup" />
+      </block>
+    </reference>
+
+  </onestepcheckout_index_index>
+
+  <checkout_cart_index>
+
+    <reference name="after_body_start">
+       <block type="core/text" name="cart_retargeting_code"> <!-- append a simple text block, probably better to use a new template block -->
+          <action method="setText"> <!-- set our new block's text -->
+              <text>
+                <![CDATA[
+                <!-- Industry West Cart Retargeting Code -->
+                <script language='JavaScript1.1' src='//pixel.mathtag.com/event/js?mt_id=859095&mt_adid=151036&v1=&v2=&v3=&s1=&s2=&s3='></script>
+                ]]>
+              </text>
+          </action>
+      </block>
+    </reference>
+
+    <update handle="add_retargeting_code"></update>
+    <update handle="add_retargeting_code_navigate"></update>
+
+    <reference name="checkout.cart">
+      <block type="core/text_list" name="after_cart" as="afterCart">
+        <block type="cms/block" name="cart_questions">
+  				<action method="setBlockId">
+  					<block_id>cart_question_chunk</block_id>
+  				</action>
+  		  </block>
+      </block>
+    </reference>
+
+  </checkout_cart_index>
+
+  <customer_account_createwholesale translate="label">
+    <label>Wholesale Customer Account Registration Form</label>
+
+    <reference name="root">
+        <action method="setTemplate"><template>page/1column.phtml</template></action>
+    </reference>
+
+    <reference name="content">
+      <block type="customer/form_register" name="customer_form_wholesaleregister" as="commercial_orders" template="customer/form/wholesaleregister.phtml">
+        <block type="page/html_wrapper" name="customer.form.register.fields.before" as="form_fields_before" translate="label">
+          <label>Form Fields Before</label>
+        </block>
+      </block>
+    </reference>
+
+  </customer_account_createwholesale>
+
+  <customer_account_memberlogin translate="label">
+    <label>Wholesale Customer Account Login Form</label>
+    <!-- Mage_Customer -->
+    <remove name="right"/>
+
+    <reference name="root">
+        <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+    </reference>
+    <reference name="left">
+			<block type="catalog/navigation" name="catalog.left_nav" template="catalog/navigation/left_nav.phtml" />
+		</reference>
+
+    <reference name="content">
+        <block type="customer/form_login" name="customer_form_memberlogin" template="customer/form/memberlogin.phtml"/>
+    </reference>
+  </customer_account_memberlogin>
+
+  <sales_order_history>
+
+    <reference name="content">
+      <remove name="customer.account.link.back" />
+    </reference>
+
+  </sales_order_history>
+
+  <catalogsearch_result_index_empty>
+
+    <reference name="root">
+      <action method="setTemplate"><template>page/1column.phtml</template></action>
+    </reference>
+
+  </catalogsearch_result_index_empty>
+
+  <customer_account_logoutsuccess>
+
+    <reference name="header">
+      <action method="unsetChild"><name>breadcrumbs</name></action>
+    </reference>
+
+  </customer_account_logoutsuccess>
+
+  <contacts_index_index>
+
+    <reference name="root">
+      <action method="setTemplate"><template>page/1column.phtml</template></action>
+    </reference>
+
+    <reference name="header">
+      <action method="unsetChild"><name>breadcrumbs</name></action>
+    </reference>
+
+    <reference name="contact_columns">
+      <block type="core/template" name="contact.column.content" as="contactColumns" before=""  template="industry_west/contact-columns.phtml" />
+    </reference>
+
+    <reference name="contact_columns">
+      <block type="core/template" name="contactForm"  template="contacts/form.phtml"  />
+    </reference>
+
+    <reference name="content">
+      <action method="unsetChild"><name>contactForm</name></action>
+      <block type="core/template" name="contact_page_heading" as="pageHeading" template="cms/content_heading.phtml" />
+    </reference>
+
+
+  </contacts_index_index>
+
+  <checkout_onepage_success>
+
+    <reference name="head">
+      <action method="addItem"><type>skin_js</type><name>js/facebook_tracking.js</name></action>
+    </reference>
+
+    <reference name="after_body_start">
+       <block type="core/text" name="order_success_retargeting_code">
+          <action method="setText">
+              <text>
+                <![CDATA[ <!-- Industry West Cart Retargeting Code -->
+                <script language='JavaScript1.1' src='//pixel.mathtag.com/event/js?mt_id=859098&mt_adid=151036&v1=&v2=&v3=&s1=&s2=&s3='></script>
+                <script language='JavaScript1.1' src='//pixel.mathtag.com/event/js?mt_id=859096&mt_adid=151036&v1=&v2=&v3=&s1=&s2=&s3='></script>
+                ]]>
+              </text>
+          </action>
+      </block>
+    </reference>
+
+    <update handle="add_retargeting_code"></update>
+    <update handle="add_retargeting_code_navigate"></update>
+
+    <reference name="root">
+      <action method="unsetChild"><name>breadcrumbs</name></action>
+    </reference>
+
+  </checkout_onepage_success>
+
+
+  <!-- START UPDATE HANDLES -->
+
+  <add_retargeting_code>
+    <reference name="after_body_start">
+       <block type="core/text" name="adaptive_campaigns_retargeting_code">
+          <action method="setText">
+              <text>
+                <![CDATA[ <!-- Industry West Cart Retargeting Code -->
+                <script src='https://app.adaptivecampaigns.com/v0/AdaptiveCampaigns.min.js' data-campaign='46' data-action='convert'></script>
+                <script src='https://app.adaptivecampaigns.com/v0/AdaptiveCampaigns.min.js' data-campaign='59' data-action='convert'></script>
+                ]]>
+              </text>
+          </action>
+      </block>
+    </reference>
+  </add_retargeting_code>
+  <add_retargeting_code_navigate>
+    <reference name="after_body_start">
+      <block type="core/text" name="adaptive_campaigns_retargeting_code_navigate">
+        <action method="setText">
+          <text>
+            <![CDATA[ <!-- Industry West Cart Retargeting Code -->
+                <script src='https://app.adaptivecampaigns.com/v0/AdaptiveCampaigns.min.js' data-campaign='46' data-action='navigate'></script>
+                ]]>
+          </text>
+        </action>
+      </block>
+    </reference>
+  </add_retargeting_code_navigate>
+
+	<!-- END UPDATE HANDLES -->
+
+
+  <CATEGORY_212><update handle="add_retargeting_code"></update></CATEGORY_212>
+  <CATEGORY_209><update handle="add_retargeting_code"></update></CATEGORY_209>
+  <CATEGORY_216><update handle="add_retargeting_code"></update></CATEGORY_216>
+  <CATEGORY_224><update handle="add_retargeting_code"></update></CATEGORY_224>
+  <CATEGORY_218><update handle="add_retargeting_code"></update></CATEGORY_218>
+  <CATEGORY_221><update handle="add_retargeting_code"></update></CATEGORY_221>
+
+  <PRODUCT_1108><update handle="add_retargeting_code"></update></PRODUCT_1108>
+  <PRODUCT_2967><update handle="add_retargeting_code"></update></PRODUCT_2967>
+  <PRODUCT_1112><update handle="add_retargeting_code"></update></PRODUCT_1112>
+
+</layout>
+
+
+
+
+

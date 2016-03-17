@@ -1,0 +1,24 @@
+<?php $current_category = Mage::registry('current_category');
+
+if( is_object( $current_category) )
+{
+  $id = $current_category->getID();
+
+  if( $id != 0 )
+  {
+    $text  = $current_category->getData('thin_banner_text');
+    $show  = $current_category->getData('show_thin_banner');
+
+    if( $show == 1 ){ ?>
+
+      <div class="wrapper global-notice discount-notice">
+        <div class="container center">
+          <p><?php echo $text;?></p>
+        </div>
+      </div>
+
+    <?php }
+  }
+}
+
+

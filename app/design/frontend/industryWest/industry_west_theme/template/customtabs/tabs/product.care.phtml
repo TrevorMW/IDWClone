@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @see IndustryWest_CustomTabs_Block_Tabs_Productcare
+ */
+
+$html = '';
+$current_product = $this->getProduct();
+$productCare = $this->getProductCare();
+
+$productCare != null && is_object( $current_product ) ? $html .= $productCare : $html .= '<p>'.$current_product->getName().' has no specific product care information.</p>';
+$html .= '<br /><br /><a href="'.Mage::getUrl('product-care').'" class="btn btn-small btn-orange">View All Product Care Information</a>';
+
+echo $html;

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2015 Amasty (https://www.amasty.com)
+ * @package Amasty_Preorder
+ */
+-->
+<config>
+    <sections>
+        <ampreorder translate="label" module="ampreorder">
+            <label>Pre Order</label>
+            <tab>amasty</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>161805</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <functional>
+                    <label>Functional Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label comment tooltip">
+                            <label>Enable Pre Orders</label>
+                            <comment>Affects new orders with products set to be pre-ordered.</comment>
+                            <tooltip>Please note! Products on "Pre Order" must be set to "In Stock"</tooltip>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <allowemptyqty translate="label comment">
+                            <label>Allow Pre Orders For Products With Zero Quantity</label>
+                            <comment>If set to "No", it is possible to pre order products that have quantity set to 1 or higher only. This way you can limit number of products available for pre order.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowemptyqty>
+                        <disableforpositiveqty translate="label comment">
+                            <label>Disable Pre Order For Items With Positive Qty</label>
+                            <comment>If set to "Yes", pre orders will take effect only for products with quantity 0 or lower.</comment>
+                            <depends><allowemptyqty>1</allowemptyqty></depends>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </disableforpositiveqty>
+                    </fields>
+                </functional>
+                <general translate="label">
+                    <label>Display Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <addtocartbuttontext translate="label comment">
+                            <label>Add To Cart Button Text</label>
+                            <comment>Text to display on the button instead of 'Add To Cart'</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </addtocartbuttontext>
+                        <defaultpreordernote translate="label comment">
+                            <label>Default Pre-Order Note</label>
+                            <comment>You can use product attributes like {sku} or {delivery_time}</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </defaultpreordernote>
+                        <orderpreorderwarning translate="label comment">
+                            <label>Pre-Order Warning</label>
+                            <comment>Message to be displayed with order information</comment>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </orderpreorderwarning>
+                    </fields>
+                </general>
+                <additional>
+                    <label>Additional Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <discovercompositeoptions translate="label">
+                            <label>Detect Complex Products Which Consist only of Pre-Order Components</label>
+                            <comment><![CDATA[
+                            If set to 'Yes', the extension analyzes your configurable, bundle and grouped products on category pages to indicate preorder status before customers choose any option in cases, when all components have 'Preorder' status.<br />
+                            Please be aware this may cause huge performance degradation for larger catalogs.
+                            ]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </discovercompositeoptions>
+                        <autoaddwarningtoemail translate="label comment">
+                            <label>Automatically Add Warning to Transactional Emails</label>
+                            <comment>Please select 'No' in case you prefer to use {{var order.preorder_warning}} variable in your placing order transactional email template.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </autoaddwarningtoemail>
+                    </fields>
+                </additional>
+            </groups>
+        </ampreorder>
+    </sections>
+</config>

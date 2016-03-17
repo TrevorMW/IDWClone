@@ -1,0 +1,172 @@
+<div id="menu-node-edit-container" class="category-content">    
+    <?php echo $this->getChildHtml('form') ?>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+
+    function menuNodeReset(url,useAjax){
+        if(useAjax){
+            var params = {active_tab_id:false};
+            updateContent('<?php echo $this->getResetUrl() ?>', params);
+        }else{
+            location.href = '<?php echo $this->getResetUrl() ?>'
+        }
+    }
+    function menuNodeDelete(url, useAjax){
+        if(confirm('<?php echo Mage::helper('magemenu')->__('Are you sure you want to delete this menu node with all its children?') ?>')){
+            if(useAjax){
+                tree.nodeForDelete = tree.currentNodeId;
+                updateContent(url, {}, true);
+            }else{
+                location.href = url;
+            }
+        }
+
+    }
+    /**
+     * Update category content area
+     */
+    function updateContent(url, params, refreshTree) {
+        if (!params) {
+            params = {};
+        }
+        if (!params.form_key) {
+            params.form_key = FORM_KEY;
+        }
+
+        var categoryContainer = $('menu-node-edit-container');
+        new Ajax.Request(url + (url.match(new RegExp('\\?')) ? '&isAjax=true' : '?isAjax=true' ), {
+            parameters:  params,
+            evalScripts: true,
+            onComplete:  refreshTree ? refreshTreeArea.bind(this) : false,
+            onSuccess: function(transport) {
+                try {
+                    if (transport.responseText.isJSON()) {
+                        var response = transport.responseText.evalJSON()
+                        if (response.error) {
+                            alert(response.message);
+                        }
+                        if(response.ajaxExpired && response.ajaxRedirect) {
+                            setLocation(response.ajaxRedirect);
+                        }
+                    } else {
+                        $(categoryContainer).update(transport.responseText);
+                    }
+                }
+                catch (e) {
+                    $(categoryContainer).update(transport.responseText);
+                }
+            }
+        });
+        var headers = $$('div.content-header-floating');
+        for(var i=0; i<headers.length;i++) {
+            if (headers[i].down('div.content-header')) {
+                headers[i].down('div.content-header').remove();
+            }
+        }
+    }
+
+    /**
+     * Refresh tree nodes after saving or deleting a category
+     */
+    function refreshTreeArea(transport)
+    {        
+        <?php if(version_compare(Mage::getVersion(), '1.6.0.0', '>=')): ?>
+        return;
+        <?php endif; ?>
+        if (tree && editingCategoryBreadcrumbs) {
+            // category deleted - delete its node
+            if (tree.nodeForDelete) {
+                var parentNode = tree.getNodeById(tree.nodeForDelete).parentNode;
+                parentNode.removeChild(tree.getNodeById(tree.nodeForDelete));
+                tree.nodeForDelete = false;
+                tree.currentNodeId = false;
+            }
+            // category created - add its node
+            else if (tree.addNodeTo) {
+                var parent = tree.getNodeById(tree.currentNodeId);
+                tree.addNodeTo = false;
+
+                if(parent) {
+	                var node = new Ext.tree.AsyncTreeNode(editingCategoryBreadcrumbs[editingCategoryBreadcrumbs.length - 1]);
+	                node.loaded = true;                
+	                tree.currentNodeId = node.id;
+	                parent.appendChild(node);
+	                
+	                if (parent.expanded) {
+	                    tree.selectCurrentNode();
+	                } else {
+	                    var timer;
+	                    parent.expand();
+	                    var f = function(){
+	                        if(parent.expanded){ // done expanding
+	                            clearInterval(timer);
+	                            tree.selectCurrentNode();
+	                        }
+	                    };
+	                    timer = setInterval(f, 200);
+	                }
+	                // tree.selectCurrentNode();
+                }
+            }
+            return;
+
+            // update all affected menus nodes names
+            for (var i = 0; i < editingCategoryBreadcrumbs.length; i++) {
+                var node = tree.getNodeById(editingCategoryBreadcrumbs[i].id);
+                if (node) {
+                    node.setText(editingCategoryBreadcrumbs[i].text);
+                }
+            }
+            
+			return;
+
+			/*
+            // update all affected menus nodes names
+            for (var i = 0; i < editingCategoryBreadcrumbs.length; i++) {
+                var node = tree.getNodeById(editingCategoryBreadcrumbs[i].id);
+                if (node) {
+                    node.setText(editingCategoryBreadcrumbs[i].text);
+                    
+                    if(node.ui) {
+                        if(i > 0) {
+	                    	Ext.get(node.getUI().iconNode).removeClass(node.attributes.iconCls);
+	                    	Ext.get(node.getUI().iconNode).addClass(editingCategoryBreadcrumbs[i].iconCls);
+                        }
+                    	Ext.fly(node.ui.wrap).removeClass('active-category');
+                    	Ext.fly(node.ui.wrap).removeClass('no-active-category');
+                    	Ext.fly(node.ui.wrap).addClass(editingCategoryBreadcrumbs[i].cls);                    	
+                    }
+            	}
+            }
+            */
+        }
+    }
+
+    function displayLoadingMask()
+    {
+       var loaderArea = $$('#html-body .wrapper')[0]; // Blocks all page
+        Position.clone($(loaderArea), $('loading-mask'), {offsetLeft:-2});
+        toggleSelectsUnderBlock($('loading-mask'), false);
+        Element.show('loading-mask');
+    }
+
+
+    function toggleApplyVisibility(select) {
+        if ($(select).value == 1) {
+            $(select).next('select').removeClassName('no-display');
+            $(select).next('select').removeClassName('ignore-validate');
+
+        } else {
+            $(select).next('select').addClassName('no-display');
+            $(select).next('select').addClassName('ignore-validate');
+            var options = $(select).next('select').options;
+            for( var i=0; i < options.length; i++) {
+                options[i].selected = false;
+            }
+        }
+    }
+
+    
+//]]>
+</script>

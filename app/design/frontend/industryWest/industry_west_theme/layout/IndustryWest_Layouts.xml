@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Global Layout Overrides to add custom structure blocks to layout template files
+ *
+ * @category    industryWest
+ * @package     industryWest_Layouts
+ */
+-->
+<layout version="0.1.0">
+
+    <industry_west>
+        <reference name="root">
+            <block type="core/text_list" name="home_slider" as="homeSlider" translate="label">
+                <label>Custom Title</label>
+
+          			<block type="industryWest_Layouts/home_slider" name="slider" as="slider" template="industryWest_Layouts/slider.phtml" />
+            </block>
+        </reference>
+    </industry_west>
+
+</layout>

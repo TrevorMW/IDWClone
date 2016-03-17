@@ -1,0 +1,123 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     IndustryWest_Themex
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ *
+ *
+ * @var Mage_Page_Block_Html_Header $this
+ *
+ */
+
+//var_dump( $this->getLayout()->getUpdate()->getHandles() );
+//var_dump(Mage::app()->getStore()->getCode());
+
+
+//var_dump( $this->getRequest()->getControllerName() );
+//var_dump( $this->getRequest()->getActionName() );
+//var_dump( $this->getRequest()->getRouteName() );
+//var_dump( $this->getRequest()->getModuleName() );
+
+$homepage = $this->getIsHomePage();
+$url = Mage::app()->getFrontController()->getRequest()->getRequestString();
+$page = str_replace( '/','', $url );
+
+$header_class = $utility_class = '';
+
+if( $page == "about-us" || $homepage || $page == "commercial-orders-overview" || $page == "our-story" || $page == "our-process" || $page == "blog" )
+{
+  $header_class  = 'floating';
+  $utility_class = '';
+}
+else
+{
+  $header_class  = 'fixed';
+  $utility_class = 'gray';
+}
+
+$url         = $this->helper('customer')->getAccountUrl();
+$logged_in   = $this->helper('customer')->isLoggedIn();
+$cart_totals = $this->helper('checkout/cart')->getSummaryCount();
+
+$logged_in ? $link_name = 'My Account' : $link_name = 'Login' ; ?>
+
+<noscript>
+  <iframe src="//www.googletagmanager.com/ns.html?id=GTM-TQJ9LX" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
+<script type="text/javascript">
+  (function(w,d,s,l,i)
+  {
+    w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TQJ9LX');
+</script>
+
+<div id="fb-root"></div>
+
+<?php if( $this->getChildHtml('global_notices') != null ){ echo $this->getChildHtml('global_notices');  } ?>
+<?php if( $this->getChildHtml('categoryMsg')    != null ){ echo $this->getChildHtml('categoryMsg');     } ?>
+<?php if( $this->getChildHtml('discountMsg')    != null ){ echo $this->getChildHtml('discountMsg');     } ?>
+
+<div class="wrap header" data-header="true">
+
+  <div class="wrapper header <?php echo $header_class; ?>">
+
+  	<div class="wrapper utility <?php echo $utility_class; ?>">
+  	  <div class="container right">
+        <nav class="utility-nav">
+          <ul class="inline">
+            <li><a href="#" id="js-utility-search"><i class="fa fa-search"></i></a><a href="#" id="js-utility-mobile-search"><i class="fa fa-search active"></i><i class="fa fa-times inactive" ></i></a></li>
+            <li id="js-search-box"><?php echo $this->getChildHtml('topSearch') ?></li>
+            <li>
+              <a href="<?php echo $this->helper('customer')->getAccountUrl(); ?>" data-target-element="#header-account"><?php echo $this->__($link_name); ?></a>
+            </li>
+            <li><a href="/checkout/cart"><i class="fa fa-shopping-cart"></i> <?php $cart_totals > 0 ? print '('.$cart_totals.')' : ''; ?></a></li>
+            <?php //echo $this->getChildHtml('minicart_head'); ?>
+          </ul>
+        </nav>
+  	  </div>
+  	</div>
+
+    <div class="wrapper navigation">
+      <div class="container center logo-box">
+        <a class="logo" href="/">
+          <img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" class="large" />
+        </a>
+      </div>
+
+      <div class="container navigation <?php echo $header_class; ?>">
+        <a href="#" id="js-mobile-nav-trigger" class="acc"><span class="active">&#9776;</span><span class="inactive">&times;</span></a>
+        <?php echo $this->getChildHtml('topMenu') ?>
+      </div>
+    </div>
+
+    <?php echo $this->getChildHtml('breadcrumbs') ?>
+  </div>
+
+</div>
+
+<div class="wrap body" data-body-wrap="true">
+
+

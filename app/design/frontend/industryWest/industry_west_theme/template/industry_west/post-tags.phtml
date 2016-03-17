@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+
+$html = '';
+$i = 0;
+
+$tags = $this->getPost()->getTags();
+
+if( count( $tags > 0) ):
+
+  $html .= '<aside>';
+
+  $html .= '<h3>Tags</h3>';
+
+  $html .= '<div class="tag-cloud">';
+
+  foreach( $tags as $tag ):
+
+    $i == 0 ? $comma = '' : $comma = ', &nbsp;';
+
+    $html .= $comma.'<a href="/blog/tag/'.$tag->slug.'">'.$tag->name.'</a>';
+
+    $i++;
+
+  endforeach;
+
+  $html .= '</div>';
+
+  $html .= '</aside>';
+
+endif; ?>
+
+<?php echo $html; ?>

@@ -1,0 +1,27 @@
+<?php $post = $this->getPost(); ?>
+
+<aside>
+
+  <h3>Share</h3>
+
+  <ul class="social">
+
+    <li>
+      <a target="_blank" class="btn btn-black btn-social" href="http://twitter.com/home/?status=<?php echo urlencode( $post->getPostTitle() ).' &mdash; '.urlencode( $post->getPermalink() );?>">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a target="_blank" class="btn btn-black btn-social" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode( $post->getPermalink() ) ?>&t=<?php echo urlencode( $post->getTitle() ); ?>">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a target="_blank" class="btn btn-black btn-social" href="https://plus.google.com/share?url=<?php echo urlencode( $post->getPermalink() ) ?>">
+        <i class="fa fa-google-plus"></i>
+      </a>
+    </li>
+
+  </ul>
+
+</aside>

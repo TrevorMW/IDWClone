@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<layout>
+	<default>
+	    <reference name="head">
+	        <action method="addJs"><script>colorpicker/yahoo.color.js</script></action>
+	        <action method="addJs"><script>colorpicker/colorPicker.js</script></action>            
+	        <action method="addItem"><type>js_css</type><name>colorpicker/colorPicker.css</name></action>
+	    </reference>
+    </default>
+    <magemenu_adminhtml_menuitem_index>
+        <reference name="content">
+            <block type="magemenu/adminhtm_menuitem" name="menu_list">
+                <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher">
+                    <action method="setUseConfirm"><params>0</params></action>
+                </block>
+            </block>
+        </reference>
+    </magemenu_adminhtml_menuitem_index>
+
+    <magemenu_adminhtml_menuitem_edit>
+    	<reference name="head">
+    		<action method="addCss"><name>onlinebizsoft/magemenu/css/magemenu.css</name></action>
+    	</reference>	
+        <reference name="left">
+            <block name="menu.tree" type="magemenu/adminhtml_menuitem_edit_tree" template="onlinebizsoft/magemenu/edit/tree.phtml" />
+        </reference>
+        <reference name="content">
+            <block name="menu.edit" type="magemenu/adminhtml_menuitem_edit" template="onlinebizsoft/magemenu/edit.phtml" />
+        </reference>
+    </magemenu_adminhtml_menuitem_edit>
+
+</layout>

@@ -1,0 +1,79 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+$tbody = $tfoot = $html = '';
+
+foreach ($this->getTotals() as $_code => $_total):
+
+  if( $_code != 'grand_total') :
+
+    if ($_total->getBlockName()){
+
+      $tbody .= $this->getChildHtml($_total->getBlockName(), false);
+
+    } else {
+
+      $tbody .= '<tr class="'.$_code.'">';
+
+      $tbody .= '<td '.$this->getLabelProperties().'>';
+      $_total->getStrong() ? $tbody .= '<strong>'.$this->escapeHtml($_total->getLabel()).'</strong>' : $tbody .= $this->escapeHtml($_total->getLabel()) ;
+      $tbody .= '</td>';
+
+      $tbody .= '<td '.$this->getValueProperties().'>';
+      $_total->getStrong() ? $tbody .= '<strong>'.$this->formatValue($_total).'</strong>' : $tbody .= $this->formatValue($_total) ;
+      $tbody .= '</td>';
+
+      $tbody .= '</tr>';
+    }
+
+  else:
+
+    if ($_total->getBlockName()){
+
+      $tfoot .= $this->getChildHtml($_total->getBlockName(), false);
+
+    } else {
+
+      $tfoot .= '<tr class="'.$_code.'">';
+
+      $tfoot .= '<td '.$this->getLabelProperties().'>';
+      $_total->getStrong() ? $tfoot .= '<strong>'.$this->escapeHtml($_total->getLabel()).'</strong>' : $tfoot .= $this->escapeHtml($_total->getLabel()) ;
+      $tfoot .= '</td>';
+
+      $tfoot .= '<td '.$this->getValueProperties().'>';
+      $_total->getStrong() ? $tfoot .= '<strong>'.$this->formatValue($_total).'</strong>' : $tfoot .= $this->formatValue($_total) ;
+      $tfoot .= '</td>';
+
+      $tfoot .= '</tr>';
+    }
+
+  endif;
+
+endforeach;
+
+$html .= '<tbody>'.$tbody.'</tbody><tfoot>'.$tfoot.'</tfoot>';
+
+echo $html; ?>

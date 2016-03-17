@@ -1,0 +1,18 @@
+<?php
+/**
+ * Vertical Menu for MenuCreator
+ *
+ * @see OnlineBiz_MageMenu_Block_Menuitem
+ */
+$menu_id = str_replace( ' ','-', strtolower($this->getName() ) ); ?>
+
+<aside data-mobile-dropdown-parent="true">
+  <a href="#" data-mobile-dropdown="true">Customer Service</a>
+	<nav class="sub-nav <?php echo $menu_id?> ">
+		<ul>
+			<?php echo $this->getMenu() ?>
+	  </ul>
+	</nav>
+</aside>
+
+

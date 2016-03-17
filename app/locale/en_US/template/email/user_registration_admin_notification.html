@@ -1,0 +1,64 @@
+<!--@subject New Customer Registration - {{var customer.name}}! @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"var logo_url":"Email Logo Image Url",
+"htmlescape var=$customer.name":"Customer Name",
+"store url=\"customer/account/\"":"Customer Account Url",
+"var customer.email":"Customer Email",
+"htmlescape var=$customer.password":"Customer Password"}
+@-->
+
+<!--@styles
+@-->
+
+{{template config_path="design/email/header"}}
+{{inlinecss file="email-inline.css"}}
+
+<table cellpadding="0" cellspacing="0" border="0">
+    <tr>
+        <td class="action-content">
+            <h1>New {{var account_type}} Customer Registration</h1>
+            <br />
+            <table>
+              <tr>
+                <td style="width:35%;">First Name:</td>
+                <td>{{var first_name}}</td>
+              </tr>
+              <tr>
+                <td style="width:35%;">Last Name:</td>
+                <td>{{var last_name}}</td>
+              </tr>
+              <tr>
+                <td style="width:35%;">Email:</td>
+                <td>{{var email}}{{var customer.email}}</td>
+              </tr>
+              <tr>
+                <td style="width:35%;">Address:</td>
+                <td>{{var address}}</td>
+              </tr>
+              <tr>
+                <td style="width:35%;">Title:</td>
+                <td>{{var user_title}}</td>
+              </tr>
+              <tr>
+                <td style="width:35%;">Business License #:</td>
+                <td>{{var user_business_license}}</td>
+              </tr>
+              <tr>
+                <td style="width:35%;">How did you find out about us?</td>
+                <td>{{var heard_about}}</td>
+              </tr>
+              <tr>
+                <td style="width:35%;">Phone #:</td>
+                <td>{{var phone}}</td>
+              </tr>
+              <tr>
+                <td style="width:35%;">Fax #:</td>
+                <td>{{var fax}}</td>
+              </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer"}}

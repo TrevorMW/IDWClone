@@ -1,0 +1,237 @@
+<div class="content-header">
+        <h3 class="icon-head head-menus"><?php echo $this->getHeader() . ($this->getMenuId() ? ' (' . Mage::helper('magemenu')->__('ID: %s', $this->getMenuId()) . ')' : '') ?></h3>
+        <p class="content-buttons form-buttons">
+			<?php echo $this->getAddButtonHtml() ?>
+            <?php if($this->getMenuId()): ?>
+                    <?php echo $this->getDeleteButtonHtml() ?>
+            <?php endif; ?>
+            <?php echo $this->getAdditionalButtonsHtml(); ?>
+            <?php echo $this->getSaveButtonHtml() ?>
+			<?php echo $this->getResetButtonHtml() ?>
+        </p>
+</div>
+<?php if($this->hasRootMenu()): ?>
+    <?php echo $this->getTabsHtml() ?>
+<?php else: ?>
+<div class="messages warning-msg">
+    <?php echo Mage::helper('magemenu')->__('Set root menu for this store in the <a href="%s">configuration</a>', $this->getStoreConfigurationUrl()) ?>
+</div>
+<?php endif; ?>
+<iframe name="iframeSave" style="display:none; width:100%;" src="<?php echo $this->getJsUrl() ?>blank.html"></iframe>
+<div id="menu_edit_form_alt">
+<form target="iframeSave" id="menu_edit_form" action="<?php echo $this->getSaveUrl() ?>" method="post" enctype="multipart/form-data">
+    <div class="no-display">
+    	<input type="hidden" name="isIframe" value="1" />
+    	<input name="form_key" type="hidden" value="<?php echo $this->getFormKey() ?>" />    
+        <input type="hidden" name="menu_products" id="in_menuitem_products" value="" />
+        <input type="hidden" name="active_tab_id" id="active_tab_id" value="" />
+    </div>
+    <div id="menu_tab_content"></div>
+</form>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+    menuForm = new varienForm('menu_edit_form');
+
+    menuForm.submit= function (url) {
+        this.errorSections = $H({});
+        this.canShowError = true;
+        this.submitUrl = url;
+        if (this.validator && this.validator.validate()) {
+            if(this.validationUrl){
+                this._validate();
+            }
+            else{
+                this._submit();
+            }
+            displayLoadingMask();
+            return true;
+        }
+        return false;
+    };
+
+    function menuNodeSubmit(url) {
+        var activeTab = $('active_tab_id');
+        if (activeTab) {
+            if (activeTab.tabsJsObject && activeTab.tabsJsObject.activeTab) {
+                activeTab.value = activeTab.tabsJsObject.activeTab.id;
+            }
+        }
+
+        var params = {};
+        /* Fix for IE 9, Chome, Safari */
+        var fields = $('menu_edit_form_alt').getElementsBySelector('input', 'select');
+        for(var i=0;i<fields.length;i++){
+            if (!fields[i].name) {
+                continue;
+            }
+            params[fields[i].name] = fields[i].getValue();
+        }
+
+        if( ! params['general[id]']) {
+			// creating node
+			var parentId = params['general[path]'];
+            if (!tree.currentNodeId) {
+                tree.currentNodeId = parentId;
+            }
+            tree.addNodeTo = parentId;
+        }
+      
+        if (tree && !tree.addNodeTo) {
+            var currentNode = tree.getNodeById(tree.currentNodeId);
+
+            if (currentNode) {
+
+                // Active / Inactive
+                if (params['general[is_active]'] == 1) {
+                    var oldClass = 'no-active-category';
+                    var newClass = 'active-category';
+                } else {
+                    var oldClass = 'active-category';
+                    var newClass = 'no-active-category';
+                }
+
+                Element.removeClassName(currentNode.ui.wrap.firstChild, oldClass);
+                Element.addClassName(currentNode.ui.wrap.firstChild, newClass);
+
+				// Icon
+				var classes = new Array('tree-node-nowhere', 'tree-node-product', 'tree-node-external', 'tree-node-internal', 'tree-node-cms-page', 'tree-node-cms_page', 'tree-node-category');
+				var iconNode = Ext.get(currentNode.getUI().iconNode);
+
+				classes.each(function(name){
+					Ext.get(currentNode.getUI().iconNode).removeClass(name);
+				});
+				
+				iconNode.addClass('tree-node-' + params['general[link_to]']);
+				
+                var name = currentNode.text;
+
+                if (!name.match(/(\(\d+\))/)) {
+                   name = params['general[name]'];
+                } else {
+                    name = name.replace(/(.+)\(/,params['general[name]']+' (');
+                }
+                currentNode.setText(name);
+            }
+        }
+
+        /**
+         * We submit first loaded form
+         */
+        if (!tree.currentNodeId) {
+            tree.currentNodeId = tree.root.id;
+            tree.addNodeTo = tree.currentNodeId;
+        }
+        menuForm.submit();
+    }
+
+<?php if($this->isAjax() && ($block = $this->getLayout()->getBlock('tabs')) && ($_tabsJsObject=$block->getJsObjectName())): ?>
+    <?php echo $_tabsJsObject ?>.moveTabContentInDest();
+    if (<?php echo $_tabsJsObject ?>.activeTab) {
+        $('active_tab_id').value = <?php echo $_tabsJsObject ?>.activeTab.id;
+    }
+    $('active_tab_id').tabsJsObject = <?php echo $_tabsJsObject ?>;
+<?php endif; ?>
+
+updateTopButtonToolbarToggle();
+
+function bindAttributeInputType()
+{
+    switchDefaultValueField();
+}
+
+
+function switchDefaultValueField()
+{
+    if (!$('link_to')) {
+        return;
+    }
+
+    var currentValue = $('link_to').value;
+    var link_types = ['category', 'product', 'cms_page', 'internal', 'external'];
+    link_types.each(function(item) {
+        var id = 'link_to_' + item;
+        if(currentValue == item) {
+    		setRowVisibility(id, true);
+        } else {
+        	setRowVisibility(id, false);
+        }
+    });
+}
+
+function switchExplodeValueField()
+{
+    if (!$('template')) {
+        return;
+    }
+
+    var currentValue = $('template').value;
+    var menu_types = ['onlinebizsoft/magemenu/horizontal.phtml', 'onlinebizsoft/magemenu/exploded.phtml', 'onlinebizsoft/magemenu/vertical.phtml', 'onlinebizsoft/magemenu/link_list.phtml'];
+    menu_types.each(function(item) {
+        if(currentValue == 'onlinebizsoft/magemenu/exploded.phtml') {
+    		setExplodeDataVisibility(true);
+        } else {
+        	setExplodeDataVisibility(false);
+        }
+    });
+}
+
+function setRowVisibility(id, isVisible)
+{
+    if ($(id)) {
+        var td = $(id).parentNode;
+        var tr = $(td.parentNode);
+
+        if (isVisible) {
+            tr.show();
+        } else {
+            tr.blur();
+            tr.hide();
+        }
+    }
+}
+
+function setExplodeDataVisibility(isVisible)
+{
+	if($('popup_width') && $('popup_column') && $('popup_column_width')){
+		var wtd = $('popup_width').parentNode;
+		var wtr = $(wtd.parentNode);
+		var ctd = $('popup_column').parentNode;
+		var ctr = $(ctd.parentNode);
+		var cwtd = $('popup_column_width').parentNode;
+		var cwtr = $(cwtd.parentNode);
+		if (isVisible) {
+			wtr.show();
+			ctr.show();
+			cwtr.show();
+		} else {
+			wtr.blur();
+			wtr.hide();
+			cwtr.hide();
+			cwtr.hide();
+			ctr.blur();
+			ctr.hide();
+		}
+    }
+}
+
+function updateRequiredOptions()
+{
+    if ($F('link_to')=='select' && $F('is_required')==1) {
+        $('option-count-check').addClassName('required-options-count');
+    } else {
+        $('option-count-check').removeClassName('required-options-count');
+    }
+}
+
+if($('link_to')){
+    Event.observe($('link_to'), 'change', switchDefaultValueField);
+}
+if($('template')){
+    Event.observe($('template'), 'change', switchExplodeValueField);
+}
+switchDefaultValueField();
+switchExplodeValueField();
+
+//]]>
+</script>

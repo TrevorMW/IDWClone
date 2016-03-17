@@ -1,0 +1,74 @@
+<?php
+/**
+ * Unirgy_Giftcert extension
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @category   Unirgy
+ * @package    Unirgy_Giftcert
+ * @copyright  Copyright (c) 2008 Unirgy LLC
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+/**
+ * @category   Unirgy
+ * @package    Unirgy_Giftcert
+ * @author     Boris (Moshe) Gurevich <moshe@unirgy.com>
+ */
+$_usePin = Mage::getStoreConfig('ugiftcert/default/use_pin'); ?>
+
+<header class="page-header">
+  <h1 class="page-title"><?php echo $this->__('Check Your Gift Card Balance')?></h1>
+</header>
+
+
+<?php if ($this->getRequest()->isPost() ): ?>
+
+  <ul class="messages">
+  <?php if ( is_null( $this->getCert() ) ): ?>
+    <li class="error-msg"><?php echo $this->__($_usePin ? 'Please enter a valid card number and PIN.' : 'Please enter a valid card number.')?></li>
+  <?php elseif ( $this->getCert() === false ): ?>
+    <li class="error-msg"><?php echo $this->__($_usePin ? 'The card number or PIN entered are invalid. Please retry' : 'The card number entered is invalid. Please retry')?></li>
+  <?php elseif ( true ):  endif; ?>
+  </ul>
+
+  <?php if( $this->getCert() ): ?>
+    <div class="gift-card-mock">
+      <h4><?php echo $this->__('Your Gift Card Balance')?></h4>
+      <p><strong><?php echo $this->__('Card Number')?></strong><br/><?php echo $this->getCertNumberMasked() ?></p>
+      <p><strong><?php echo $this->__('Balance')?></strong><br/><big class="balance"><?php echo $this->getBalance() ?></big></p>
+      <?php if ($exp = $this->getCert()->getExpireAt()): ?>
+      <p><strong><?php echo $this->__('Expires On')?></strong><br/><?php echo $this->helper('ugiftcert')->formatDate($exp, 'long') ?></p>
+      <?php endif; ?>
+    </div>
+  <?php endif; ?>
+<?php endif; ?>
+
+<div class="category-description">
+  <p><?php echo $this->__($_usePin ? 'To check the balance of a Gift Card, enter the card number and PIN below.' : 'To check the balance of a Gift Card, enter the card number below.')?></p></div>
+  <div class="enter-gift-card-number">
+    <div class="content">
+      <form action="<?php echo $this->getUrl('ugiftcert/customer/balance')?>" method="post">
+        <ul class="form-list">
+          <li>
+            <label for="cert_number"><?php echo $this->__('Card Number')?></label>
+            <div class="inline-inputs" style="min-width:200px;">
+              <div class="inline-input-field"><input type="text" class="input-text" id="cert_number" name="cert_number"/></div>
+              <?php if (Mage::getStoreConfig('ugiftcert/default/use_pin')): ?>
+                <label for="pin"><?php echo $this->__('PIN')?></label>
+                <input type="text" class="input-text" id="pin" name="pin"/>
+              <?php endif; ?>
+              <button type="submit" class="btn btn-black"><?php echo $this->__('Get Balance')?></button>
+            </div>
+          </li>
+        </ul>
+      </form>
+    </div>
+</div>
+
+

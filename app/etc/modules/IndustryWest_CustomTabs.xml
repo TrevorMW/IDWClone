@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <IndustryWest_CustomTabs>
+            <active>true</active>
+            <codePool>local</codePool>
+        </IndustryWest_CustomTabs>
+    </modules>
+</config>

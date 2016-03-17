@@ -1,0 +1,317 @@
+/** INDUSTRY WEST SCSS THEME
+ *
+ * Site By:
+ *
+ * Version: 1.0.0
+ *
+ */
+
+@import 'variables';
+
+table{
+	display: table;
+	table-layout: auto;
+	width:100%;
+
+	& thead{
+		text-align: left;
+		font-family:$headingFont;
+		font-weight:700;
+		font-size: 12px;
+		color:$darkGray;
+		text-transform: uppercase;
+		letter-spacing:2px;
+	}
+
+	& td{
+		padding: 25px 8px;
+
+		&:first-child{
+			padding-left:0;
+		}
+	}
+
+	&.cart-totals{
+		color:$darkGray;
+		font-size:18px;
+		margin-bottom:15px;
+
+		& td{
+			text-align: right;
+			padding: 20px 35px 20px 0;
+			font-family:$headingFont;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			font-size:12px;
+			font-weight:700;
+		}
+
+		& tr{
+			padding: 0 15px;
+
+			&.grand-total{
+  			background-color: $normalGray;
+
+  			& td{
+  				font-size:18px;
+  				line-height:1.2em;
+  			}
+			}
+
+			& td:last-child{
+				width:40%;
+			}
+		}
+
+
+		& tfoot{
+			background-color: $normalGray;
+
+			& td{
+				font-size:18px;
+				line-height:1.2em;
+			}
+		}
+
+	}
+
+	&.checkout-totals,
+	&.past-order-totals{
+  	float:right;
+		max-width:50%;
+		margin: 20px 0;
+		color:$darkGray;
+		background-color:$lightGray;
+
+		&.onestep{
+  		max-width:100%;
+		}
+
+		& td{
+			text-align: right;
+			padding:15px;
+			font-family:$headingFont;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			font-size:12px;
+			font-weight:600;
+		}
+
+		& tr{
+			padding: 0 15px;
+
+			& td:last-child{
+				width:30%;
+			}
+		}
+
+		& tfoot{
+			background-color: $normalGray;
+
+			& td{
+				font-size:18px;
+			}
+		}
+	}
+
+	&.spec-table{
+    table-layout: auto;
+
+    & th,
+    & td{
+      padding:15px;
+      font-size:14px;
+      line-height:1.4em;
+    }
+
+    & th{
+      background-color:$lightGray;
+      color:$darkGray;
+      font-family:$headingFont;
+      font-weight:600;
+      width:30%;
+      font-size:12px;
+      text-transform: uppercase;
+      letter-spacing:1px;
+    }
+
+    & td{
+      border:1px solid $lightGray;
+
+    }
+	}
+
+	@include below-1024(){
+
+  	&.checkout-totals,
+  	&.past-order-totals{
+    	max-width:75%;
+  	}
+	}
+
+	@include below-800(){
+
+  	&.checkout-totals,
+  	&.past-order-totals{
+    	float:none;
+    	max-width:100%;
+  	}
+	}
+}
+
+.data-table{
+	table-layout: auto;
+	display: table;
+	width:100%;
+
+	& tbody{
+		border-top:3px solid $darkGray;
+
+		& tr{
+			border-bottom:3px solid $darkGray;
+		}
+
+		& td{
+			vertical-align: top;
+		}
+	}
+
+	& th{
+  	text-align:right;
+  	padding: 4px 8px;
+
+  	&:first-child{
+    	text-align:left;
+    	padding-left:0;
+  	}
+
+  	&.a-center{
+      text-align:center;
+  	}
+	}
+
+	& td{
+  	text-align: right;
+  	width:auto;
+	}
+
+  &.cart{
+
+    & .cart-product-image{
+    	width:125px;
+    }
+
+    & .cart-product-actions{
+    	width:auto;
+    	padding-right:0;
+    	padding-left:15px;
+    }
+
+    & .cart-product-info{
+      min-width:25%;
+      text-align: left;
+      padding-right:30px;
+    }
+
+    & .cart-product-total{
+      width:auto;
+    }
+
+    @include below-800(){
+      table-layout:fixed;
+
+      & td{
+        white-space: normal;
+      }
+
+      & .cart-product-info{
+        width:150px;
+      }
+
+      & .cart-product-image{
+    	  width:100px;
+      }
+    }
+
+    @include below-600(){
+      table-layout:fixed;
+
+      & td{
+        white-space:wrap;
+      }
+
+      & td.cart-product-image,
+      & .cart-product-pricing,
+      & th.cart-product-info{
+        display: none;
+        width:auto;
+        max-width:0;
+      }
+
+      & th.cart-product-image{
+        width:40%;
+      }
+
+      & td.cart-product-info{
+        width:40%;
+        padding-left:0;
+        white-space: normal;
+      }
+    }
+  }
+
+  &.past-orders,
+  &.past-order-review{
+    table-layout:auto;
+    margin-top:25px;
+
+    & td{
+      vertical-align: top;
+    }
+
+    & .order-actions{
+      width:150px;
+      text-align: right;
+      padding-right:0;
+    }
+
+	}
+
+  &.past-order-review{
+
+    & td{
+
+      &:first-child{
+        text-align: left;
+      }
+    }
+  }
+
+  @include below-800(){
+
+    &.past-orders{
+
+      & .order-date,
+      & .order-ship,
+      & .order-total{
+        display:none;
+      }
+    }
+
+    &.past-order-review{
+
+      & .past-order-sku,
+      & .past-order-price{
+        display: none;
+      }
+    }
+
+    &.checkout-review{
+
+      & td.review-product-name{
+        text-align: left;
+      }
+    }
+  }
+}
+
